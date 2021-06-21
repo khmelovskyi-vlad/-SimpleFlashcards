@@ -14,7 +14,7 @@ namespace SimpleFlashcards
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResource("permissions", new string[] { "Permission" }),
+                new IdentityResource("permissions", new string[] { "permission" }),
                 new IdentityResource("roles", new[] { "role" })
             };
 

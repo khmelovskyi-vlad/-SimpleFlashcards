@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleFlashcards.Data;
 
 namespace SimpleFlashcards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210620184912_AddIps")]
+    partial class AddIps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,7 +243,7 @@ namespace SimpleFlashcards.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ips");
+                    b.ToTable("Ip");
                 });
 
             modelBuilder.Entity("SimpleFlashcards.Entities.UserIp", b =>
@@ -256,7 +258,7 @@ namespace SimpleFlashcards.Migrations
 
                     b.HasIndex("IpId");
 
-                    b.ToTable("UserIps");
+                    b.ToTable("UserIp");
                 });
 
             modelBuilder.Entity("SimpleFlashcards.Entities.ApplicationRoleClaim", b =>

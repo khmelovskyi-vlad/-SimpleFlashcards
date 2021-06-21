@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleFlashcards.Data;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,8 @@ namespace SimpleFlashcards
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
+            services.AddCustomServices();
+
             //services.AddAutoMapper(typeof(Startup));
 
             //services.AddSpaStaticFiles(configuration =>
@@ -93,6 +96,8 @@ namespace SimpleFlashcards
             app.UseIdentityServer();
             //app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseIpBanMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,0 +1,156 @@
+﻿@using SimpleFlashcards.Models.Admin;
+@using Microsoft.AspNetCore.Authorization
+@model IEnumerable<RoleModel>
+@inject IAuthorizationService AuthorizationService
+<h1 class="bg-info text-white">All Roles</h1>
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "manageAllRoles")).Succeeded)
+{
+    <a asp-action="Create" class="btn btn-secondary m-1">Create a Role</a>
+    <a asp-action="CreateClaim" class="btn btn-secondary m-1">Create a Claim</a>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "banUser")).Succeeded)
+    {
+        <a asp-action="BanUser" class="btn btn-secondary m-1">BanUsers</a>
+    }
+    @if ((await AuthorizationService.AuthorizeAsync(User, "banIp")).Succeeded)
+    {
+        <a asp-action="BanIp" class="btn btn-secondary m-1">BanIps</a>
+    }
+}
+
+
+
+<table class="table table-sm table-bordered table-bordered">
+    <tr>
+        @if ((await AuthorizationService.AuthorizeAsync(User, "manageAllRoles")).Succeeded)
+        {
+            <th>ID</th>
+            <th>Name</th>
+            <th>Users</th>
+            <th>Update</th>
+            <th>Delete</th>
+        }
+        else if ((await AuthorizationService.AuthorizeAsync(User, "manageManagers")).Succeeded)
+        {
+            <th>Name</th>
+            <th>Users</th>
+            <th>Update</th>
+            <th>Delete</th>
+        }
+        else if ((await AuthorizationService.AuthorizeAsync(User, "manageUsers")).Succeeded)
+        {
+            <th>Name</th>
+            <th>Users</th>
+            <th>Update</th>
+        }
+    </tr>
+
+    @if ((await AuthorizationService.AuthorizeAsync(User, "manageAllRoles")).Succeeded)
+    {
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Name</td>
+                <td>@role.UserNames</td>
+                <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+    else if ((await AuthorizationService.AuthorizeAsync(User, "manageManagers")).Succeeded)
+    {
+        @foreach (var role in Model)
+        {
+            if (role.Name == "manager" || role.Name == "user")
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>@role.UserNames</td>
+                    <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                </tr>
+            }
+        }
+    }
+    else if ((await AuthorizationService.AuthorizeAsync(User, "manageUsers")).Succeeded)
+    {
+        @foreach (var role in Model)
+        {
+            if (role.Name == "user")
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>@role.UserNames</td>
+                    <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                </tr>
+            }
+        }
+    }
+</table>
+
+
+
+
+@*<table class="table table-sm table-bordered table-bordered">
+        @if ((await AuthorizationService.AuthorizeAsync(User, "manageAllRoles")).Succeeded)
+        {
+            <tr><th>ID</th><th>Name</th><th>Users</th><th>Update</th><th>Delete</th><th>Ban users</th><th>Ban ips</th></tr>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Id</td>
+                    <td>@role.Name</td>
+                    <td>@role.UserNames</td>
+                    <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                    <td><a class="btn btn-sm btn-warning" asp-action="BanUser">BanUsers</a></td>
+                    <td><a class="btn btn-sm btn-warning" asp-action="BanIp">BanIps</a></td>
+                </tr>
+            }
+        }
+        else if ((await AuthorizationService.AuthorizeAsync(User, "manageManagers")).Succeeded)
+        {
+            <tr><th>Name</th><th>Users</th><th>Update</th><th>Ban users</th><th>Ban ips</th></tr>
+            @foreach (var role in Model)
+            {
+                if (role.Name == "manager" || role.Name == "user")
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>@role.UserNames</td>
+                        <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                        <td><a class="btn btn-sm btn-warning" asp-action="BanUser">BanUsers</a></td>
+                        <td><a class="btn btn-sm btn-warning" asp-action="BanIp">BanIps</a></td>
+                    </tr>
+                }
+            }
+        }
+        else if ((await AuthorizationService.AuthorizeAsync(User, "manageUsers")).Succeeded)
+        {
+            <tr><th>Name</th><th>Users</th><th>Update</th><th>Ban users</th></tr>
+            @foreach (var role in Model)
+            {
+                if (role.Name == "user")
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>@role.UserNames</td>
+                        <td><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                        <td><a class="btn btn-sm btn-warning" asp-action="BanUser">BanUsers</a></td>
+                    </tr>
+                }
+            }
+        }
+    </table>*@

@@ -12,6 +12,8 @@ namespace SimpleFlashcards.Entities
         public string LastName { get; set; }
         public bool IsInBan { get; set; }
 
+        public List<UserIp> UserIps { get; set; }
+
         public List<ApplicationUserClaim> Claims { get; set; }
         public List<ApplicationUserLogin> Logins { get; set; }
         public List<ApplicationUserToken> Tokens { get; set; }

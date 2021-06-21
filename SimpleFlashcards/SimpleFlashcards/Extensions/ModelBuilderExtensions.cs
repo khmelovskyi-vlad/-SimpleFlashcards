@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SimpleFlashcards.Data.Initializers;
 using SimpleFlashcards.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,10 @@ namespace SimpleFlashcards.Extensions
 {
     public static class ModelBuilderExtensions
     {
+        public static void Seed(this ModelBuilder modelBuilder, IInitializer initializer)
+        {
+            initializer.Run(modelBuilder);
+        }
         public static void AddIdentityNavigation(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApplicationUser>(b =>
@@ -46,6 +51,11 @@ namespace SimpleFlashcards.Extensions
                     .HasForeignKey(rc => rc.RoleId)
                     .IsRequired();
             });
+        }
+        public static void AddPrimaryKeys(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserIp>()
+                .HasKey(ui => new { ui.UserId, ui.IpId });
         }
     }
 }
