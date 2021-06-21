@@ -95,6 +95,7 @@ namespace SimpleFlashcards.Controllers
                 ModelState.AddModelError("", "No role found");
             return View("Index", _roleManager.Roles);
         }
+        //
         [Authorize(Policy = "manageUsers")]
         public async Task<IActionResult> Update(string id)
         {
