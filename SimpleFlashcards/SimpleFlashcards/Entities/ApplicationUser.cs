@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SimpleFlashcards.Entities.Flashcards;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,6 @@ namespace SimpleFlashcards.Entities
         public List<ApplicationUserLogin> Logins { get; set; }
         public List<ApplicationUserToken> Tokens { get; set; }
         public List<ApplicationUserRole> UserRoles { get; set; }
+        //public List<Flashcard> Flashcards { get; set; }
     }
 }

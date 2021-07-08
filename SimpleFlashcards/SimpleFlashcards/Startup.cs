@@ -122,8 +122,9 @@ namespace SimpleFlashcards
         {
             SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
             sqlConnectionStringBuilder.PersistSecurityInfo = true;
-            sqlConnectionStringBuilder.DataSource = "DESKTOP-U3G7G64\\SQL_DEVELOPER";
-            sqlConnectionStringBuilder.UserID = "SQLProjectsDB";
+            //sqlConnectionStringBuilder.DataSource = "DESKTOP-U3G7G64\\SQL_DEVELOPER";
+            sqlConnectionStringBuilder.DataSource = "OIUHJK1123\\MYMSSQLSERVER";
+            sqlConnectionStringBuilder.UserID = "sa";
             sqlConnectionStringBuilder.Password = "Test1234";
             sqlConnectionStringBuilder.InitialCatalog = "SimpleFlashcards";
             return sqlConnectionStringBuilder;
