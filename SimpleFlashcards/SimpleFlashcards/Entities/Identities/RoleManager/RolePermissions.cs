@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFlashcards.Entities
+namespace SimpleFlashcards.Entities.Identities.RoleManager
 {
     public class RolePermissions
     {

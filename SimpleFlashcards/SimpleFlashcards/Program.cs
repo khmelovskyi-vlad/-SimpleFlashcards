@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SimpleFlashcards.Data.Initializers;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

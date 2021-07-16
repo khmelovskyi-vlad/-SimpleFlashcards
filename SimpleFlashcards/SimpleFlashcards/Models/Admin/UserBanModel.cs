@@ -1,4 +1,5 @@
 ﻿using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

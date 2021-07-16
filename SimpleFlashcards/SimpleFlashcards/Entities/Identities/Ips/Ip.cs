@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFlashcards.Entities
+namespace SimpleFlashcards.Entities.Identities.Ips
 {
     public class Ip
     {

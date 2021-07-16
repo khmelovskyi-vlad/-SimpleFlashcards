@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
 
 namespace SimpleFlashcards.Areas.Identity.Pages.Account
 {

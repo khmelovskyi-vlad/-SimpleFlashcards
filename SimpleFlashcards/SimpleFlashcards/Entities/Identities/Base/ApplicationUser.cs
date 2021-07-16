@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SimpleFlashcards.Entities.Flashcards;
+using SimpleFlashcards.Entities.Identities.Ips;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFlashcards.Entities
+namespace SimpleFlashcards.Entities.Identities.Base
 {
     public class ApplicationUser : IdentityUser<Guid>
     {

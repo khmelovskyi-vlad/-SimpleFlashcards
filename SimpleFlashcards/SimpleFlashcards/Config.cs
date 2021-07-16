@@ -38,8 +38,8 @@ namespace SimpleFlashcards
                     AllowAccessTokensViaBrowser = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
 
-                    RedirectUris = { "https://localhost:44379" },
-                    PostLogoutRedirectUris = { "https://localhost:44379" },
+                    RedirectUris = { "https://localhost:44390" },
+                    PostLogoutRedirectUris = { "https://localhost:44390" },
 
                     AllowedScopes =
                     {
@@ -59,10 +59,10 @@ namespace SimpleFlashcards
                     AlwaysSendClientClaims = true,
                     RequireConsent = false,
 
-                    RedirectUris = { "https://localhost:44379/signin-oidc" },
+                    RedirectUris = { "https://localhost:44390/signin-oidc" },
 
 
-                    PostLogoutRedirectUris = { "https://localhost:44379/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44390/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {

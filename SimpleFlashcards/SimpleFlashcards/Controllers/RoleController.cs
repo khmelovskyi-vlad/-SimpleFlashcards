@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleFlashcards.Data;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
 using SimpleFlashcards.Models.Admin;
 using System;
 using System.Collections.Generic;

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
 
 namespace SimpleFlashcards.Areas.Identity.Pages.Account
 {
@@ -23,8 +24,18 @@ namespace SimpleFlashcards.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public void OnGet()
+        //public void OnGet()
+        //{
+        //}
+        public async Task<IActionResult> OnGet()
         {
+            var user = HttpContext.User;
+            if (user?.Identity.IsAuthenticated == true)
+            {
+                await _signInManager.SignOutAsync();
+            }
+            _logger.LogInformation("User logged out.");
+            return LocalRedirect("/");
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)

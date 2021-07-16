@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
 
 namespace SimpleFlashcards.Areas.Identity.Pages.Account
 {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Identities.Base;
+using SimpleFlashcards.Entities.Identities.RoleManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
