@@ -18,7 +18,7 @@ namespace SimpleFlashcards.Entities.Flashcards
         public List<FlashcardTranslation> FlashcardTranslations { get; set; }
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
-        public List<FileInfo> Images { get; set; }
+        public List<FileInfoFlashcard> Images { get; set; }
         public Guid? TopicId { get; set; }
         public Topic Topic { get; set; }
     }

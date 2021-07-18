@@ -16,6 +16,6 @@ namespace SimpleFlashcards.Entities.Flashcards
         public Guid FlashcardTranslationId { get; set; }
         public FlashcardTranslation FlashcardTranslation { get; set; }
         public Guid? PronunciationId { get; set; }
-        public FileInfo Pronunciation { get; set; }
+        public List<FileInfoFlashcardWord> Pronunciations { get; set; }
     }
 }
