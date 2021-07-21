@@ -1,5 +1,4 @@
-﻿using SimpleFlashcards.Entities.Files;
-using SimpleFlashcards.ValueObjects;
+﻿using SimpleFlashcards.Entities.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +8,9 @@ namespace SimpleFlashcards.Entities.Flashcards
 {
     public class FlashcardWord
     {
-        public Guid Id { get; set; }
-        public string Value { get; set; }
-        public string Transcription { get; set; }
-        public PartOfSpeech PartOfSpeech { get; set; }
-        public Guid FlashcardTranslationId { get; set; }
-        public FlashcardTranslation FlashcardTranslation { get; set; }
-        public Guid? PronunciationId { get; set; }
-        public List<FileInfoFlashcardWord> Pronunciations { get; set; }
+        public Guid WordId { get; set; }
+        public Word Word { get; set; }
+        public Guid FlashcardId { get; set; }
+        public Flashcard Flashcard { get; set; }
     }
 }

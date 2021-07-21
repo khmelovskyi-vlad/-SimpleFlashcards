@@ -10,6 +10,6 @@ namespace SimpleFlashcards.Entities.Maps
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<FlashcardTranslation> FlashcardTranslations { get; set; }
+        public List<Word> Words { get; set; }
     }
 }

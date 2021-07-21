@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleFlashcards.Data;
 
 namespace SimpleFlashcards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210720150234_Migr2_FirstChangeFlashcards")]
+    partial class Migr2_FirstChangeFlashcards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +61,9 @@ namespace SimpleFlashcards.Migrations
                     b.Property<string>("ContentType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("FlashcardWordId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -71,12 +76,9 @@ namespace SimpleFlashcards.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("WordId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("WordId");
+                    b.HasIndex("FlashcardWordId");
 
                     b.ToTable("FileInfoFlashcardWords");
                 });
@@ -113,21 +115,6 @@ namespace SimpleFlashcards.Migrations
 
             modelBuilder.Entity("SimpleFlashcards.Entities.Flashcards.FlashcardWord", b =>
                 {
-                    b.Property<Guid>("FlashcardId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("WordId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("FlashcardId", "WordId");
-
-                    b.HasIndex("WordId");
-
-                    b.ToTable("FlashcardWords");
-                });
-
-            modelBuilder.Entity("SimpleFlashcards.Entities.Flashcards.Word", b =>
-                {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
@@ -135,14 +122,17 @@ namespace SimpleFlashcards.Migrations
                     b.Property<Guid>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("FlashcardId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("PartOfSpeech")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TParentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Transcription")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TranslationParentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -151,9 +141,11 @@ namespace SimpleFlashcards.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("TParentId");
+                    b.HasIndex("FlashcardId");
 
-                    b.ToTable("Words");
+                    b.HasIndex("TranslationParentId");
+
+                    b.ToTable("FlashcardWords");
                 });
 
             modelBuilder.Entity("SimpleFlashcards.Entities.Identities.Base.ApplicationRole", b =>
@@ -464,9 +456,9 @@ namespace SimpleFlashcards.Migrations
 
             modelBuilder.Entity("SimpleFlashcards.Entities.Files.FileInfoFlashcardWord", b =>
                 {
-                    b.HasOne("SimpleFlashcards.Entities.Flashcards.Word", "Word")
+                    b.HasOne("SimpleFlashcards.Entities.Flashcards.FlashcardWord", "FlashcardWord")
                         .WithMany("Pronunciations")
-                        .HasForeignKey("WordId");
+                        .HasForeignKey("FlashcardWordId");
                 });
 
             modelBuilder.Entity("SimpleFlashcards.Entities.Flashcards.Flashcard", b =>
@@ -484,30 +476,19 @@ namespace SimpleFlashcards.Migrations
 
             modelBuilder.Entity("SimpleFlashcards.Entities.Flashcards.FlashcardWord", b =>
                 {
-                    b.HasOne("SimpleFlashcards.Entities.Flashcards.Flashcard", "Flashcard")
-                        .WithMany("FlashcardWords")
-                        .HasForeignKey("FlashcardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SimpleFlashcards.Entities.Flashcards.Word", "Word")
-                        .WithMany("FlashcardWords")
-                        .HasForeignKey("WordId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SimpleFlashcards.Entities.Flashcards.Word", b =>
-                {
                     b.HasOne("SimpleFlashcards.Entities.Maps.Country", "Country")
-                        .WithMany("Words")
+                        .WithMany("FlashcardWords")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SimpleFlashcards.Entities.Flashcards.Word", "TParent")
+                    b.HasOne("SimpleFlashcards.Entities.Flashcards.Flashcard", "Flashcard")
+                        .WithMany("FlashcardWords")
+                        .HasForeignKey("FlashcardId");
+
+                    b.HasOne("SimpleFlashcards.Entities.Flashcards.FlashcardWord", "TranslationParent")
                         .WithMany("Translations")
-                        .HasForeignKey("TParentId")
+                        .HasForeignKey("TranslationParentId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

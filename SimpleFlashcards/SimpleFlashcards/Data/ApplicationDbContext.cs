@@ -31,8 +31,8 @@ namespace SimpleFlashcards.Data
         public DbSet<SubTopic> SubTopics { get; set; }
 
         public DbSet<Flashcard> Flashcards { get; set; }
-        public DbSet<FlashcardTranslation> FlashcardTranslations { get; set; }
         public DbSet<FlashcardWord> FlashcardWords { get; set; }
+        public DbSet<Word> Words { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

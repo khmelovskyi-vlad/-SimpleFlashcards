@@ -8,6 +8,10 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Migrations\20210720144410_Migr2_FirstChangeFlashcards.cs" />
+    <Compile Remove="Migrations\20210720144410_Migr2_FirstChangeFlashcards.Designer.cs" />
+    <Compile Remove="Migrations\20210720145757_Migr2_FirstChangeFlashcards.cs" />
+    <Compile Remove="Migrations\20210720145757_Migr2_FirstChangeFlashcards.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

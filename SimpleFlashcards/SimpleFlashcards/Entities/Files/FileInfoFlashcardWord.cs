@@ -15,7 +15,7 @@ namespace SimpleFlashcards.Entities.Files
         public string Path { get; set; }
         public string OriginalName { get; set; }
         public FileType Type { get; set; }
-        public Guid? FlashcardWordId { get; set; }
-        public FlashcardWord FlashcardWord { get; set; }
+        public Guid? WordId { get; set; }
+        public Word Word { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace SimpleFlashcards.Entities.Flashcards
         public string Value { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
-        public List<FlashcardTranslation> FlashcardTranslations { get; set; }
+        public List<FlashcardWord> FlashcardWords { get; set; }
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
         public List<FileInfoFlashcard> Images { get; set; }

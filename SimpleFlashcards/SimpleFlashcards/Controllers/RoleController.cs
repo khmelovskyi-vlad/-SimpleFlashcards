@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleFlashcards.Data;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Flashcards;
 using SimpleFlashcards.Entities.Identities.Base;
+using SimpleFlashcards.Entities.Maps;
 using SimpleFlashcards.Models.Admin;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,20 @@ namespace SimpleFlashcards.Controllers
         [Authorize(Policy = "manageUsers")]
         public async Task<ViewResult> Index()
         {
+            ////var adsasd = await _context.FlashcardWords.Where(el => el.Transcription != "ok").ToListAsync();
+            ////_context.FlashcardWords.RemoveRange(adsasd);
+            //var country = await _context.Countries.FirstOrDefaultAsync();
+            //var flashcard = await _context.Flashcards.FirstOrDefaultAsync();
+            //var fl = await _context.Words.FirstOrDefaultAsync(f => f.Transcription == "ok");
+            //var flashcardWord1 = new Word() { Id = Guid.NewGuid(), CountryId = country.Id, TParentId = fl.Id };
+            ////fl.TranslationParentId = flashcardWord1.Id;
+            //_context.Words.Add(flashcardWord1);
+            //await _context.SaveChangesAsync();
+            //var flashcardWords = await _context.Words.Include(f => f.TParent).ThenInclude(f => f.TParent).Include(f => f.Translations).ThenInclude(f => f.Translations).ToListAsync();
+
+            //var user = await _context.Users.FirstOrDefaultAsync();
+            //var userName = User.Identity.Name;
+            //var userType = User.Identity.AuthenticationType;
             var roles = await GetRoles();
             return View(roles);
         }

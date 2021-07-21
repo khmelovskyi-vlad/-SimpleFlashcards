@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimpleFlashcards.Data.Initializers;
 using SimpleFlashcards.Entities;
+using SimpleFlashcards.Entities.Flashcards;
 using SimpleFlashcards.Entities.Identities.Base;
 using SimpleFlashcards.Entities.Identities.Ips;
 using System;
@@ -58,6 +59,13 @@ namespace SimpleFlashcards.Extensions
         {
             modelBuilder.Entity<UserIp>()
                 .HasKey(ui => new { ui.UserId, ui.IpId });
+            modelBuilder.Entity<FlashcardWord>()
+                .HasKey(ui => new { ui.FlashcardId, ui.WordId });
+            modelBuilder.Entity<Word>().HasOne(x => x.TParent)
+                    .WithMany(x => x.Translations)
+                    .HasForeignKey(x => x.TParentId)
+                    .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

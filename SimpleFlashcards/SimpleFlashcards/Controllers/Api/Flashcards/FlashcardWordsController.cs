@@ -16,24 +16,24 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
     [ApiController]
     public class FlashcardWordsController : ControllerBase
     {
-        private ApplicationDbContext db { get; set; }
-        public FlashcardWordsController(ApplicationDbContext db)
-        {
-            this.db = db;
-        }
-        [HttpGet]
-        [Route("{flashcardTranslationId}")]
-        public async Task<List<FlashcardWordModel>> GetFlashcards(Guid flashcardTranslationId)
-        {
-            //return new List<FlashcardModel>();
-            return (await db.FlashcardWords.Where(f => f.FlashcardTranslationId == flashcardTranslationId).ToListAsync()).Select(f => new FlashcardWordModel(f)).ToList();
-        }
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<FlashcardWordModel> GetFlashcardTranslation(Guid id)
-        {
-            //return new FlashcardModel();
-            return new FlashcardWordModel((await db.FlashcardWords.FirstOrDefaultAsync(f => f.Id == id)));
-        }
+        //private ApplicationDbContext db { get; set; }
+        //public FlashcardWordsController(ApplicationDbContext db)
+        //{
+        //    this.db = db;
+        //}
+        //[HttpGet]
+        //[Route("{flashcardTranslationId}")]
+        //public async Task<List<FlashcardWordModel>> GetFlashcards(Guid flashcardId)
+        //{
+        //    //return new List<FlashcardModel>();
+        //    return (await db.FlashcardWords.Where(f => f.FlashcardId == flashcardId).ToListAsync()).Select(f => new FlashcardWordModel(f)).ToList();
+        //}
+        //[HttpGet]
+        //[Route("{id}")]
+        //public async Task<FlashcardWordModel> GetFlashcardTranslation(Guid id)
+        //{
+        //    //return new FlashcardModel();
+        //    return new FlashcardWordModel((await db.FlashcardWords.FirstOrDefaultAsync(f => f.Id == id)));
+        //}
     }
 }
