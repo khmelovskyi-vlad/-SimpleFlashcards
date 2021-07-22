@@ -20,11 +20,7 @@ namespace SimpleFlashcards.Models.Flashcards
             UpdateDate = flashcard.UpdateDate;
             if (flashcard.FlashcardWords != null)
             {
-                FlashcardWords = flashcard.FlashcardWords.Select(el => new WordModel(el.Word)).ToList();
-            }
-            if (flashcard.Images != null)
-            {
-                ImageIds = flashcard.Images.Select(el => el.Id).ToList();
+                Words = flashcard.FlashcardWords.Select(el => new WordModel(el.Word)).ToList();
             }
             if (flashcard.Topic != null)
             {
@@ -33,9 +29,9 @@ namespace SimpleFlashcards.Models.Flashcards
         }
         public Guid Id { get; set; }
         public string Value { get; set; }
+        //public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
-        public List<WordModel> FlashcardWords { get; set; }
-        public List<Guid> ImageIds { get; set; }
+        public List<WordModel> Words { get; set; }
         public TopicModel Topic { get; set; }
     }
 }

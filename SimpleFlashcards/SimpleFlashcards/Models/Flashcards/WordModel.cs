@@ -1,4 +1,5 @@
 ﻿using SimpleFlashcards.Entities.Flashcards;
+using SimpleFlashcards.Models.Maps;
 using SimpleFlashcards.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -13,22 +14,26 @@ namespace SimpleFlashcards.Models.Flashcards
         {
 
         }
-        public WordModel(Word flashcardWord)
+        public WordModel(Word word)
         {
-            if (flashcardWord != null)
+            if (word != null)
             {
-                Id = flashcardWord.Id;
-                Value = flashcardWord.Value;
-                Transcription = flashcardWord.Transcription;
-                PartOfSpeech = flashcardWord.PartOfSpeech;
-                if (flashcardWord.Country != null)
+                Id = word.Id;
+                Value = word.Value;
+                Transcription = word.Transcription;
+                PartOfSpeech = word.PartOfSpeech;
+                if (word.Country != null)
                 {
-                    CountryId = flashcardWord.CountryId;
-                    Country = flashcardWord.Country.Name;
+                    CountryId = word.CountryId;
+                    Country = new CountryModel(word.Country);
                 }
-                if (flashcardWord.Pronunciations != null)
+                if (word.Pronunciations != null)
                 {
-                    PronunciationIds = flashcardWord.Pronunciations.Select(el => el.Id).ToList();
+                    PronunciationIds = word.Pronunciations.Select(el => el.Id).ToList();
+                }
+                if (word.Images != null)
+                {
+                    ImageIds = word.Images.Select(el => el.Id).ToList();
                 }
                 //if (flashcardWord.FlashcardTranslations != null)
                 //{
@@ -41,9 +46,10 @@ namespace SimpleFlashcards.Models.Flashcards
         public string Transcription { get; set; }
         public PartOfSpeech PartOfSpeech { get; set; }
         public Guid CountryId { get; set; }
-        public string Country { get; set; }
+        public CountryModel Country { get; set; }
         public Guid? FlashcardId { get; set; }
         //public List<FlashcardWordModel> FlashcardTranslations { get; set; }
+        public List<Guid> ImageIds { get; set; }
         public List<Guid> PronunciationIds { get; set; }
     }
 }

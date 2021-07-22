@@ -1,0 +1,35 @@
+<!-- <div>
+  <div class="row p-0 m-0 justify-content-center align-items-center">
+    <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center p-1" style="background-color: #ffd500; height: 10rem; width: 10rem;">
+      <div class="fs-3 fw-bold text-center text-break">
+        <span style="color: white;">some worhhhhhhhhhhhhhhd</span>
+      </div>
+      <div class="fs-6 fst-italic text-center text-break">
+        <span style="color: white;">some word</span>
+      </div>
+      <div class="p-1 p-sm-2 p-lg-3" style="height: 10rem; overflow: hidden; text-align: center;">
+          <img src="news.png" alt="img" style=" width: 100%; height: 100%; object-fit: contain;" />
+      </div>
+      <audio controls src="audio.mp3"> Your browser does not support the <code>audio</code> element. </audio>
+    </div>
+  </div>
+</div> -->
+<app-flashcards-header [topic]="topic" (topicEvent)="changeTopic($event)"></app-flashcards-header>
+{{topic}}
+<div class="row m-0 p-0">
+  <div *ngFor="let word of getWords()" class="col">
+    <div class="row p-0 m-0 justify-content-center align-items-center">
+      <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center p-1" style="background-color: #ffd500; height: 10rem; width: 10rem;">
+        <div class="fs-5 fw-bold text-center text-break">
+          <span style="color: white;">{{word.value}}</span>
+        </div>
+        <div class="fs-6 fst-italic text-center text-break">
+          <span style="color: white;">{{word.transcription}}</span>
+        </div>
+        <div *ngIf="word.imageIds" class="p-1 p-sm-2 p-lg-3" style="height: 10rem; overflow: hidden; text-align: center;">
+            <img src="news.png" alt="img" style=" width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

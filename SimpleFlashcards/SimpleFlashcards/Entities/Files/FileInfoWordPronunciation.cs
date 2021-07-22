@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFlashcards.Entities.Files
 {
-    public class FileInfoFlashcardWord : IFileInfo
+    public class FileInfoWordPronunciation : IFileInfo
     {
         public Guid Id { get; set; }
         public string ContentType { get; set; }

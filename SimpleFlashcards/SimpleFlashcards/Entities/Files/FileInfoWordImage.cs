@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFlashcards.Entities.Files
 {
-    public class FileInfoFlashcard : IFileInfo
+    public class FileInfoWordImage : IFileInfo
     {
         public Guid Id { get; set; }
         public string ContentType { get; set; }
@@ -15,7 +15,7 @@ namespace SimpleFlashcards.Entities.Files
         public string Path { get; set; }
         public string OriginalName { get; set; }
         public FileType Type { get; set; }
-        public Guid? FlashcardId { get; set; }
-        public Flashcard Flashcard { get; set; }
+        public Guid? WordId { get; set; }
+        public Word Word { get; set; }
     }
 }

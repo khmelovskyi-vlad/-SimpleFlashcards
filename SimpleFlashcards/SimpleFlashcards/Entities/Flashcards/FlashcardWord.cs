@@ -8,6 +8,7 @@ namespace SimpleFlashcards.Entities.Flashcards
 {
     public class FlashcardWord
     {
+        public bool IsMain { get; set; }
         public Guid WordId { get; set; }
         public Word Word { get; set; }
         public Guid FlashcardId { get; set; }

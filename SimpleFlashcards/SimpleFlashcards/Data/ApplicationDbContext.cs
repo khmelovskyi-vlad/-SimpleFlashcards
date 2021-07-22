@@ -24,8 +24,8 @@ namespace SimpleFlashcards.Data
 
         public DbSet<Country> Countries { get; set; }
 
-        public DbSet<FileInfoFlashcard> FileInfoFlashcards { get; set; }
-        public DbSet<FileInfoFlashcardWord> FileInfoFlashcardWords { get; set; }
+        public DbSet<FileInfoWordImage> FileInfoWordImages { get; set; }
+        public DbSet<FileInfoWordPronunciation> FileInfoWordPronunciations { get; set; }
 
         public DbSet<Topic> Topics { get; set; }
         public DbSet<SubTopic> SubTopics { get; set; }

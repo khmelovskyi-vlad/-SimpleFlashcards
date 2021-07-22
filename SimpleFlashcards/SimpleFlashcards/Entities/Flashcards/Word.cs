@@ -21,8 +21,7 @@ namespace SimpleFlashcards.Entities.Flashcards
         public Guid? TParentId { get; set; }
         public Word TParent { get; set; }
         public List<Word> Translations { get; set; }
-        public List<FileInfoFlashcardWord> Pronunciations { get; set; }
-
-
+        public List<FileInfoWordPronunciation> Pronunciations { get; set; }
+        public List<FileInfoWordImage> Images { get; set; }
     }
 }
