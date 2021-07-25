@@ -7,5 +7,5 @@ export class Flashcard{
   id: string;
   value: string;
   topic: string;
-  words: Word[];
+  words: Word[] = [];
 }

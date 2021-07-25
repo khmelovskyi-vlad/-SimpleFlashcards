@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from 'src/app/models/country';
-import { Word } from 'src/app/models/word';
+import { Country } from '../../models/country';
+import { Word } from '../../models/word';
 import { Flashcard } from '../../models/flashcard';
 
 @Component({

@@ -1,0 +1,35 @@
+<!-- Button trigger modal -->
+
+<button *ngIf="showButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-flashcard">
+  Create flashcard
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="create-flashcard" tabindex="-1" aria-labelledby="createFlashcardModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createFlashcardModalLabel">Create flashcard</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let word of newFlashcard.words; index as i;">
+          <label [for]="word.id + 'language-select'" class="form-label">Language</label>
+          <select [id]="word.id + 'language-select'" class="form-select" [(ngModel)]="word.countryId">
+            <option *ngFor="let language of languagesService.languages" [value]="language.id">{{language.name}}</option>
+          </select>
+          <div *ngIf="word.countryId != undefined">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="newFlashcard">
+              <option selected>No</option>
+              <option value="1">Noun</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
