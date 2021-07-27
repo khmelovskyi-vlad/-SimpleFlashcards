@@ -14,15 +14,36 @@
       </div>
       <div class="modal-body">
         <div *ngFor="let word of newFlashcard.words; index as i;">
-          <label [for]="word.id + 'language-select'" class="form-label">Language</label>
-          <select [id]="word.id + 'language-select'" class="form-select" [(ngModel)]="word.countryId">
-            <option *ngFor="let language of languagesService.languages" [value]="language.id">{{language.name}}</option>
-          </select>
-          <div *ngIf="word.countryId != undefined">
-            <select class="form-select" aria-label="Default select example" [(ngModel)]="newFlashcard">
-              <option selected>No</option>
-              <option value="1">Noun</option>
+          <div class="mb-3">
+            <label [for]="word.id + 'language-select' + 'create-flashcard'" class="form-label">Language:</label>
+            <select [id]="word.id + 'language-select' + 'create-flashcard'" class="form-select" [(ngModel)]="word.countryId">
+              <option *ngFor="let language of languagesService.languages" [value]="language.id">{{language.name}}</option>
             </select>
+          </div>
+          <div *ngIf="word.countryId != undefined">
+            <div class="mb-3">
+              <label [for]="word.id + 'word' + 'create-flashcard'" class="form-label">Word:</label>
+              <input type="text" class="form-control" [id]="word.id + 'word' + 'create-flashcard'" [(ngModel)]="word.value">
+            </div>
+            <div class="mb-3">
+              <label [for]="word.id + 'part-of-speech' + 'create-flashcard'" class="form-label">Part of speech:</label>
+              <select [id]="word.id + 'part-of-speech' + 'create-flashcard'" class="form-select" aria-label="Default select example" [(ngModel)]="word.partOfSpeech">
+                <option value="0">No</option>
+                <option value="1">Noun</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label [for]="word.id + 'transcription' + 'create-flashcard'" class="form-label">Transcription:</label>
+              <input type="text" [id]="word.id + 'transcription' + 'create-flashcard'" class="form-control" [(ngModel)]="word.transcription">
+            </div>
+            <div class="mb-3">
+                <input type="file" class="custom-file-input" accept="image/*" (change)="uploadImage($event.target.files)" multiple>
+            </div>
+            <div class="row">
+              <div *ngFor="let image of images" class="col">
+                <img [src]="getImageUrl(image)" [id]="image.name" class="img-fluid" alt="image" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
