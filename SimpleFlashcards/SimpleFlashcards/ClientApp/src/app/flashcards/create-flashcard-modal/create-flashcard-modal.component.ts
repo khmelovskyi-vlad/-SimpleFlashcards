@@ -2,66 +2,67 @@ import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core
 import { LanguagesService } from '../../services/languages/languages.service';
 import { Flashcard } from '../../models/flashcard';
 import { Word } from '../../models/word';
+import { ImgInfo } from '../../models/images/img-info';
 
 @Component({
   selector: 'app-create-flashcard-modal',
   templateUrl: './create-flashcard-modal.component.html',
   styleUrls: ['./create-flashcard-modal.component.scss']
 })
-export class CreateFlashcardModalComponent implements OnInit, OnChanges {
+export class CreateFlashcardModalComponent implements OnInit {
 
   @Input() showButton = true;
   newFlashcard = new Flashcard();
-  images: File[] = [];
+  images: File[][] = [];
+  imgInfo: ImgInfo[][] = [];
   
   constructor(public languagesService: LanguagesService) { }
 
   ngOnInit(): void {
-    const word = new Word();
-    this.newFlashcard.words.push(word);
+    this.addWord(true);
   }
 
-  uploadImage(files: FileList) {
+  uploadImage(files: FileList, index: number): void {
     if (files) {
       for (var i = 0; i < files.length; i++) {
-        this.images.push(files[i]);
+        this.getImageUrl(files[i], index);
+        this.images[index].push(files[i]);
       }
     }
-    console.log(this.images);
-  }
-  ngOnChanges(changes: any){
-    console.log('okey');
-    console.log('okey');
-    console.log('okey');
-    console.log('okey');
-    console.log('okey');
-    console.log('okey');
-    console.log('okey');
-    for (let propName in changes) {
-      console.log(propName);
-    }
   }
 
-  getImageUrl(image: File): string {
-    const url = URL.createObjectURL(image);
-    console.log(url);
-    
-    // const files = event.target.files;
-    // if (files.length === 0)
-    //     return;
-
+  getImageUrl(image: File, index: number): void {
     const mimeType = image.type;
     if (mimeType.match(/image\/*/) == null) {
-        // this.message = "Only images are supported.";
-        return '';
+        return;
     }
-
     const reader = new FileReader();
     reader.readAsDataURL(image); 
     reader.onload = (_event) => { 
-        return reader.result; 
+      this.imgInfo[index].push(new ImgInfo(image, reader.result.toString()));
     }
-    return url;
   };
+
+  removeImage(image: File, index: number): void{
+    this.images[index] = this.images[index].filter(el => el != image);
+    this.imgInfo[index] = this.imgInfo[index].filter(el => el.image != image);
+  }
+
+  addWord(isMain: boolean): void{
+    const word = new Word();
+    word.isMain = isMain;
+    this.newFlashcard.words.push(word);
+    this.images.push([]);
+    this.imgInfo.push([]);
+  }
+  // foo(): string[]{
+  //   const res: string[] = [];
+  //   for (let i = 0; i < this.images.length; i++) {
+  //     this.imageUrls.push(URL.createObjectURL(this.images[i]));
+  //     res.push(URL.createObjectURL(this.images[i]));
+      
+  //   }
+  //   return res;
+  // }
 
 }

@@ -13,7 +13,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div *ngFor="let word of newFlashcard.words; index as i;">
+        <div *ngFor="let word of newFlashcard.words; index as i;" class="border border-warning p-2 mb-3 border-1 rounded rounded-3">
           <div class="mb-3">
             <label [for]="word.id + 'language-select' + 'create-flashcard'" class="form-label">Language:</label>
             <select [id]="word.id + 'language-select' + 'create-flashcard'" class="form-select" [(ngModel)]="word.countryId">
@@ -37,14 +37,25 @@
               <input type="text" [id]="word.id + 'transcription' + 'create-flashcard'" class="form-control" [(ngModel)]="word.transcription">
             </div>
             <div class="mb-3">
-                <input type="file" class="custom-file-input" accept="image/*" (change)="uploadImage($event.target.files)" multiple>
+                <input type="file" class="custom-file-input" accept="image/*" (change)="uploadImage($event.target.files, i)" multiple>
             </div>
-            <div class="row">
-              <div *ngFor="let image of images" class="col">
-                <img [src]="getImageUrl(image)" [id]="image.name" class="img-fluid" alt="image" />
+            <div>
+              <div *ngFor="let oneImgInfo of imgInfo[i]" class="row m-0 p-0 my-2">
+                  <div class="col-11">
+                      <img [src]="oneImgInfo.url" style="max-height: 500px;" class="img-fluid" alt="image" />
+                  </div>
+                  <div class="col-1">
+                      <!-- <button type="button" class="close" aria-label="Close" (click)="removeImage(oneImgInfo.image)">
+                          <span aria-hidden="true">&times;</span>
+                      </button> -->
+                      <button type="button" class="btn-close" aria-label="Close" (click)="removeImage(oneImgInfo.image, i)"></button>
+                  </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="row p-0 m-0">
+          <button class="btn btn-primary" type="button" (click)="addWord(false)">Add word</button>
         </div>
       </div>
       <div class="modal-footer">

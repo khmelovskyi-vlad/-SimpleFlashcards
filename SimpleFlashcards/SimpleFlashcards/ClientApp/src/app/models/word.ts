@@ -11,4 +11,5 @@ export class Word{
   flashcardId: string;
   pronunciationIds: string[];
   imageIds: string[];
+  isMain: boolean;
 }
