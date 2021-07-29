@@ -51,5 +51,7 @@ namespace SimpleFlashcards.Models.Flashcards
         //public List<FlashcardWordModel> FlashcardTranslations { get; set; }
         public List<Guid> ImageIds { get; set; }
         public List<Guid> PronunciationIds { get; set; }
+        public bool IsMain { get; set; }
+        public bool IsCreated { get; set; }
     }
 }

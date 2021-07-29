@@ -42,6 +42,7 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
         {
             if (flashcardModel != null)
             {
+                flashcardModel.Words = flashcardModel.Words ?? new List<WordModel>();
                 var user = await db.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
                 var flashcard = new Flashcard();
                 flashcard.Id = Guid.NewGuid();
@@ -53,10 +54,73 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
                 {
                     flashcard.TopicId = flashcardModel.Topic.Id;
                 }
+
+                await AddImages(flashcardModel.Words);
+                await AddPronunciations(flashcardModel.Words);
                 await db.Flashcards.AddAsync(flashcard);
                 await db.SaveChangesAsync();
             }
             return BadRequest();
+        }
+        private void AddWords(List<WordModel> wordModels, Guid flashcardId)
+        {
+            var mainWordModel = wordModels.FirstOrDefault(el => el.IsMain);
+            var mainWordId = AddMainWord(mainWordModel, flashcardId);
+            foreach (var wordModel in wordModels.Where(el => !el.IsMain))
+            {
+                var word = new Word()
+                {
+                    Id = Guid.NewGuid(),
+                    CreationDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CountryId = wordModel.CountryId,
+                    PartOfSpeech = wordModel.PartOfSpeech,
+                    Transcription = wordModel.Transcription,
+                    Value = wordModel.Value,
+                };
+            }
+        }
+        private Guid AddMainWord(WordModel mainWordModel, Guid flashcardId)
+        {
+            if (!mainWordModel.IsCreated)
+            {
+                var mainWord = new Word(mainWordModel);
+                AddWord(mainWord, flashcardId);
+                return mainWord.Id;
+            }
+            return mainWordModel.Id;
+        }
+        private void AddWord(Word word, Guid flashcardId)
+        {
+            var flashcardWord = new FlashcardWord(flashcardId, word.Id, true);
+            db.Words.Add(word);
+            db.FlashcardWords.Add(flashcardWord);
+        }
+        private async Task AddImages(List<WordModel> wordModels)
+        {
+            var imgIds = wordModels.SelectMany(wm => wm.ImageIds);
+            var images = (await db.FileInfoWordImages.Where(img => imgIds.Any(id => id == img.Id) ).ToListAsync()) ?? new List<Entities.Files.FileInfoWordImage>();
+            foreach (var image in images)
+            {
+                var words = wordModels.Where(wm => wm.ImageIds != null && wm.ImageIds.Any(id => id == image.Id)) ?? new List<WordModel>();
+                foreach (var word in words)
+                {
+                    image.WordId = word.Id;
+                }
+            }
+        }
+        private async Task AddPronunciations(List<WordModel> wordModels)
+        {
+            var imgIds = wordModels.SelectMany(wm => wm.ImageIds);
+            var pronunciations = (await db.FileInfoWordPronunciations.Where(img => imgIds.Any(id => id == img.Id)).ToListAsync()) ?? new List<Entities.Files.FileInfoWordPronunciation>();
+            foreach (var pronunciation in pronunciations)
+            {
+                var words = wordModels.Where(wm => wm.PronunciationIds != null && wm.ImageIds.Any(id => id == pronunciation.Id)) ?? new List<WordModel>();
+                foreach (var word in words)
+                {
+                    pronunciation.WordId = word.Id;
+                }
+            }
         }
         [HttpPut]
         [Route("")]
