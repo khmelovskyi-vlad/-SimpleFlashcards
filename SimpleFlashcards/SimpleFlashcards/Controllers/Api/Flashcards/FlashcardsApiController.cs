@@ -54,7 +54,7 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
                 {
                     flashcard.TopicId = flashcardModel.Topic.Id;
                 }
-
+                AddWords(flashcardModel.Words, flashcard.Id);
                 await AddImages(flashcardModel.Words);
                 await AddPronunciations(flashcardModel.Words);
                 await db.Flashcards.AddAsync(flashcard);
@@ -65,35 +65,46 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
         private void AddWords(List<WordModel> wordModels, Guid flashcardId)
         {
             var mainWordModel = wordModels.FirstOrDefault(el => el.IsMain);
-            var mainWordId = AddMainWord(mainWordModel, flashcardId);
+            var mainWordId = AddWord(mainWordModel, flashcardId, true);
             foreach (var wordModel in wordModels.Where(el => !el.IsMain))
             {
-                var word = new Word()
-                {
-                    Id = Guid.NewGuid(),
-                    CreationDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CountryId = wordModel.CountryId,
-                    PartOfSpeech = wordModel.PartOfSpeech,
-                    Transcription = wordModel.Transcription,
-                    Value = wordModel.Value,
-                };
+                AddWord(wordModel, flashcardId, false);
             }
         }
-        private Guid AddMainWord(WordModel mainWordModel, Guid flashcardId)
+        private Guid AddWord(WordModel wordModel, Guid flashcardId, bool isMain)
         {
-            if (!mainWordModel.IsCreated)
+            if (!wordModel.IsCreated)
             {
-                var mainWord = new Word(mainWordModel);
-                AddWord(mainWord, flashcardId);
-                return mainWord.Id;
+                var word = new Word(wordModel);
+                AddWord(word, flashcardId, isMain);
+                wordModel.Id = word.Id;
             }
-            return mainWordModel.Id;
+            AddFlashcardWords(wordModel.Id, flashcardId, isMain);
+            return wordModel.Id;
         }
-        private void AddWord(Word word, Guid flashcardId)
+        //private Guid AddWord(WordModel wordModel, Guid flashcardId, bool isMain)
+        //{
+        //    if (wordModel.IsCreated)
+        //    {
+        //        AddFlashcardWords(wordModel.Id, flashcardId, isMain);
+        //    }
+        //    else
+        //    {
+        //        var word = new Word(wordModel);
+        //        AddWord(word, flashcardId, isMain);
+        //        wordModel.Id = word.Id;
+        //        return word.Id;
+        //    }
+        //    return wordModel.Id;
+        //}
+        private void AddWord(Word word, Guid flashcardId, bool isMain)
         {
-            var flashcardWord = new FlashcardWord(flashcardId, word.Id, true);
             db.Words.Add(word);
+            AddFlashcardWords(word.Id, flashcardId, isMain);
+        }
+        private void AddFlashcardWords(Guid wordId, Guid flashcardId, bool isMain)
+        {
+            var flashcardWord = new FlashcardWord(flashcardId, wordId, isMain);
             db.FlashcardWords.Add(flashcardWord);
         }
         private async Task AddImages(List<WordModel> wordModels)
