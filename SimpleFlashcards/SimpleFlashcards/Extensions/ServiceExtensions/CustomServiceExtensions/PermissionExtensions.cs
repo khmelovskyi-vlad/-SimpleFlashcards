@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFlashcards.Extensions
+namespace SimpleFlashcards.Extensions.ServiceExtensions.CustomServiceExtensions
 {
-    public static class PermissionsExtension
+    public static class PermissionExtensions
     {
         public static void AddPermissions(this IServiceCollection services)
         {

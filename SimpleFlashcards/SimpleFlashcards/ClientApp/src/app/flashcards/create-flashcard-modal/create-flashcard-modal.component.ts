@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { LanguagesService } from '../../services/languages/languages.service';
-import { Flashcard } from '../../models/flashcard';
-import { Word } from '../../models/word';
+import { Flashcard } from '../../models/flashcards/flashcard';
+import { Word } from '../../models/words/word';
 import { ImgInfo } from '../../models/images/img-info';
 
 @Component({

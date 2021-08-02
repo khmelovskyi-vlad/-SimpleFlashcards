@@ -6,6 +6,7 @@ using SimpleFlashcards.Entities.Identities.Base;
 using SimpleFlashcards.Entities.Identities.Ips;
 using SimpleFlashcards.Entities.Maps;
 using SimpleFlashcards.Entities.Topics;
+using SimpleFlashcards.Entities.Words;
 using SimpleFlashcards.Extensions;
 using System;
 
@@ -33,6 +34,7 @@ namespace SimpleFlashcards.Data
         public DbSet<Flashcard> Flashcards { get; set; }
         public DbSet<FlashcardWord> FlashcardWords { get; set; }
         public DbSet<Word> Words { get; set; }
+        public DbSet<Translation> Translations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from '../../models/country';
-import { Word } from '../../models/word';
-import { Flashcard } from '../../models/flashcard';
+import { Word } from '../../models/words/word';
+import { Flashcard } from '../../models/flashcards/flashcard';
 
 @Component({
   selector: 'app-flashcards',

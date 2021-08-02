@@ -1,4 +1,4 @@
-import { Word } from "./word";
+import { Word } from "../words/word";
 
 export class Flashcard{
   constructor(){

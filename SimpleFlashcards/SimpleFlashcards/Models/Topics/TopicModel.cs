@@ -21,10 +21,12 @@ namespace SimpleFlashcards.Models.Topics
             {
                 SubTopics = topic.SubTopics.Select(el => new SubTopicModel(el)).ToList();
             }
+            IsCreated = true;
         }
         public Guid Id { get; set; }
         public string Value { get; set; }
         public DateTime UpdateDate { get; set; }
         public List<SubTopicModel> SubTopics { get; set; }
+        public bool IsCreated { get; set; }
     }
 }

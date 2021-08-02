@@ -60,12 +60,19 @@ namespace SimpleFlashcards.Extensions
             modelBuilder.Entity<UserIp>()
                 .HasKey(ui => new { ui.UserId, ui.IpId });
             modelBuilder.Entity<FlashcardWord>()
-                .HasKey(ui => new { ui.FlashcardId, ui.WordId });
-            modelBuilder.Entity<Word>().HasOne(x => x.TParent)
-                    .WithMany(x => x.Translations)
-                    .HasForeignKey(x => x.TParentId)
-                    .IsRequired(false)
-                    .OnDelete(DeleteBehavior.Restrict);
+                .HasKey(fw => new { fw.FlashcardId, fw.WordId });
+            //modelBuilder.Entity<Word>().HasOne(x => x.TParent)
+            //        .WithMany(x => x.Translations)
+            //        .HasForeignKey(x => x.TParentId)
+            //        .IsRequired(false)
+            //        .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Translation>()
+                .HasKey(t => new { t.WordId1, t.WordId2 });
+            modelBuilder.Entity<Word>().HasMany(h => h.Translations1).WithOne(h => h.Word1)
+                .HasForeignKey(p => p.WordId1);
+            modelBuilder.Entity<Word>().HasMany(h => h.Translations2).WithOne(h => h.Word2)
+                .HasForeignKey(p => p.WordId2);
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SimpleFlashcards.Entities.Flashcards;
+using SimpleFlashcards.Entities.Words;
 using SimpleFlashcards.Models.Maps;
 using SimpleFlashcards.ValueObjects;
 using System;
@@ -6,7 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleFlashcards.Models.Flashcards
+namespace SimpleFlashcards.Models.Words
+
 {
     public class WordModel
     {
@@ -14,10 +16,11 @@ namespace SimpleFlashcards.Models.Flashcards
         {
 
         }
-        public WordModel(Word word)
+        public WordModel(FlashcardWord flashcardWord)
         {
-            if (word != null)
+            if (flashcardWord?.Word != null)
             {
+                var word = flashcardWord.Word;
                 Id = word.Id;
                 Value = word.Value;
                 Transcription = word.Transcription;
@@ -35,10 +38,8 @@ namespace SimpleFlashcards.Models.Flashcards
                 {
                     ImageIds = word.Images.Select(el => el.Id).ToList();
                 }
-                //if (flashcardWord.FlashcardTranslations != null)
-                //{
-                //    FlashcardTranslations = flashcardWord.FlashcardTranslations.Select(el => new FlashcardWordModel(el.FlashcardWordId == flashcardWord.Id ? el.FlashcardWord : el.FlashcardWordAlso)).ToList();
-                //}
+                IsMain = flashcardWord.IsMain;
+                IsCreated = true;
             }
         }
         public Guid Id { get; set; }
@@ -48,7 +49,6 @@ namespace SimpleFlashcards.Models.Flashcards
         public Guid CountryId { get; set; }
         public CountryModel Country { get; set; }
         public Guid? FlashcardId { get; set; }
-        //public List<FlashcardWordModel> FlashcardTranslations { get; set; }
         public List<Guid> ImageIds { get; set; }
         public List<Guid> PronunciationIds { get; set; }
         public bool IsMain { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleFlashcards.Data;
 
 namespace SimpleFlashcards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210731101530_Migr7_SecondTryAddTranslation")]
+    partial class Migr7_SecondTryAddTranslation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,7 +523,7 @@ namespace SimpleFlashcards.Migrations
                     b.HasOne("SimpleFlashcards.Entities.Flashcards.Word", "Word1")
                         .WithMany("Translations1")
                         .HasForeignKey("WordId1")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SimpleFlashcards.Entities.Flashcards.Word", "Word2")

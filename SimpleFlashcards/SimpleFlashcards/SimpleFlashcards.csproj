@@ -12,6 +12,18 @@
     <Compile Remove="Migrations\20210720144410_Migr2_FirstChangeFlashcards.Designer.cs" />
     <Compile Remove="Migrations\20210720145757_Migr2_FirstChangeFlashcards.cs" />
     <Compile Remove="Migrations\20210720145757_Migr2_FirstChangeFlashcards.Designer.cs" />
+    <Compile Remove="Migrations\20210731063120_Migr6_AddTranslation.cs" />
+    <Compile Remove="Migrations\20210731063120_Migr6_AddTranslation.Designer.cs" />
+    <Compile Remove="Migrations\20210731075536_Migr6_AddTranslation.cs" />
+    <Compile Remove="Migrations\20210731075536_Migr6_AddTranslation.Designer.cs" />
+    <Compile Remove="Migrations\20210731092222_Migr6_FirstTryAddTranslation.cs" />
+    <Compile Remove="Migrations\20210731092222_Migr6_FirstTryAddTranslation.Designer.cs" />
+    <Compile Remove="Migrations\20210731094719_Migr6_FirstTryAddTranslation.cs" />
+    <Compile Remove="Migrations\20210731094719_Migr6_FirstTryAddTranslation.Designer.cs" />
+    <Compile Remove="Migrations\20210731114451_Migr7_ThirdTryAddTranslation.cs" />
+    <Compile Remove="Migrations\20210731114451_Migr7_ThirdTryAddTranslation.Designer.cs" />
+    <Compile Remove="Migrations\20210801121713_Migr10_FifthTryAddTranslation.cs" />
+    <Compile Remove="Migrations\20210801121713_Migr10_FifthTryAddTranslation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

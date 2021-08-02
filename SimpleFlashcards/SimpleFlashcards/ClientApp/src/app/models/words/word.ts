@@ -1,5 +1,5 @@
-import { PartOfSpeech } from "../value-objects/part-of-speech";
-import { Country } from "./country";
+import { PartOfSpeech } from "../../value-objects/part-of-speech";
+import { Country } from "../country";
 
 export class Word{
   id: string;
