@@ -29,7 +29,8 @@ namespace SimpleFlashcards.Data
         public DbSet<FileInfoWordPronunciation> FileInfoWordPronunciations { get; set; }
 
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<SubTopic> SubTopics { get; set; }
+        public DbSet<Subtopic> Subtopics { get; set; }
+        public DbSet<FlashcardSubtopic> FlashcardSubtopics { get; set; }
 
         public DbSet<Flashcard> Flashcards { get; set; }
         public DbSet<FlashcardWord> FlashcardWords { get; set; }
@@ -41,7 +42,9 @@ namespace SimpleFlashcards.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.AddPrimaryKeys();
+            modelBuilder.AddForeignKeys();
             modelBuilder.AddIdentityNavigation();
+            modelBuilder.AddDefaultValues();
         }
     }
 }

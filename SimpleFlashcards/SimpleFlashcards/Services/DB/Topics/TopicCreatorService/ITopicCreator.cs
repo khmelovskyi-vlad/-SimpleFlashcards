@@ -1,4 +1,5 @@
-﻿using SimpleFlashcards.Models.Topics;
+﻿using SimpleFlashcards.Entities.Topics;
+using SimpleFlashcards.Models.Topics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace SimpleFlashcards.Services.DB.Topics.TopicCreatorService
 {
     public interface ITopicCreator
     {
-        Guid AddTopic(TopicModel topicModel);
+        Topic AddTopic(TopicModel topicModel, Guid? userId = null);
+        Subtopic AddSubtopic(SubtopicModel subtopicModel);
+        List<Subtopic> AddSubtopics(List<SubtopicModel> subtopicModels, Guid topicId);
     }
 }

@@ -4,6 +4,9 @@ using SimpleFlashcards.Entities;
 using SimpleFlashcards.Entities.Flashcards;
 using SimpleFlashcards.Entities.Identities.Base;
 using SimpleFlashcards.Entities.Identities.Ips;
+using SimpleFlashcards.Entities.Maps;
+using SimpleFlashcards.Entities.Topics;
+using SimpleFlashcards.Entities.Words;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,18 +64,21 @@ namespace SimpleFlashcards.Extensions
                 .HasKey(ui => new { ui.UserId, ui.IpId });
             modelBuilder.Entity<FlashcardWord>()
                 .HasKey(fw => new { fw.FlashcardId, fw.WordId });
-            //modelBuilder.Entity<Word>().HasOne(x => x.TParent)
-            //        .WithMany(x => x.Translations)
-            //        .HasForeignKey(x => x.TParentId)
-            //        .IsRequired(false)
-            //        .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Translation>()
                 .HasKey(t => new { t.WordId1, t.WordId2 });
-            modelBuilder.Entity<Word>().HasMany(h => h.Translations1).WithOne(h => h.Word1)
-                .HasForeignKey(p => p.WordId1);
-            modelBuilder.Entity<Word>().HasMany(h => h.Translations2).WithOne(h => h.Word2)
-                .HasForeignKey(p => p.WordId2);
+            modelBuilder.Entity<FlashcardSubtopic>()
+                .HasKey(fs => new { fs.FlashcardId, fs.SubtopicId });
 
+        }
+        public static void AddForeignKeys(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Word>().HasMany(w => w.Translations1).WithOne(t => t.Word1)
+                .HasForeignKey(t => t.WordId1).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Word>().HasMany(w => w.Translations2).WithOne(t => t.Word2)
+                .HasForeignKey(t => t.WordId2).OnDelete(DeleteBehavior.Restrict);
+        }
+        public static void AddDefaultValues(this ModelBuilder modelBuilder)
+        {
         }
     }
 }

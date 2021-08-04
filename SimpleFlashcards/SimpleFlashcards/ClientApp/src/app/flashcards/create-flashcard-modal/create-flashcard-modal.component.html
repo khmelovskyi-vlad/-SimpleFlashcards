@@ -36,6 +36,7 @@
               <label [for]="word.id + 'transcription' + 'create-flashcard'" class="form-label">Transcription:</label>
               <input type="text" [id]="word.id + 'transcription' + 'create-flashcard'" class="form-control" [(ngModel)]="word.transcription">
             </div>
+            <app-audio-recorder></app-audio-recorder>
             <div class="mb-3">
                 <input type="file" class="custom-file-input" accept="image/*" (change)="uploadImage($event.target.files, i)" multiple>
             </div>

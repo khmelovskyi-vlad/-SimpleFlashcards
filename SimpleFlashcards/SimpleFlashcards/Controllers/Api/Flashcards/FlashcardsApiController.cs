@@ -9,6 +9,7 @@ using SimpleFlashcards.Models.Flashcards;
 using SimpleFlashcards.Models.Words;
 using SimpleFlashcards.Services.DB.Flashcards.FlashcardCreatorService;
 using SimpleFlashcards.Services.Flashcards.Builders.FlashcardBuilderService;
+using SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderService;
 using SimpleFlashcards.Services.Words.Builders.TranslationBuilderService;
 using SimpleFlashcards.Services.Words.Builders.WordBuilderService;
 using System;
@@ -19,43 +20,68 @@ using System.Threading.Tasks;
 namespace SimpleFlashcards.Controllers.Api.Flashcards
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/flashcards")]
     [ApiController]
     public class FlashcardsApiController : ControllerBase
     {
         private ApplicationDbContext _context { get; set; }
         private IFlashcardCreator _flashcardCreator { get; set; }
-        public FlashcardsApiController(ApplicationDbContext context, IFlashcardCreator flashcardCreator)
+        private ISmallFlashcardBuilder _smallFlashcardBuilder { get; set; }
+        public FlashcardsApiController(ApplicationDbContext context, IFlashcardCreator flashcardCreator, ISmallFlashcardBuilder smallFlashcardBuilder)
         {
             _context = context;
             _flashcardCreator = flashcardCreator;
+            _smallFlashcardBuilder = smallFlashcardBuilder;
         }
         [HttpGet]
-        [Route("{topicId}")]
-        public async Task<List<FlashcardModel>> GetFlashcards(Guid topicId)
+        //[Route("{countryId}")]
+        [Route("{countryId}/{topicId?}")]
+        public async Task<List<SmallFlashcard>> GetFlashcards(int countryId, Guid? topicId = null)
         {
-            //return new List<FlashcardModel>();
-            return (await _context.Flashcards.Where(f => f.TopicId == topicId)
-                .Include(f => f.Topic)
-                .ThenInclude(t => t.SubTopics)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
+            var flashcardQuery = _context.Flashcards.Where(f => f.UserId == user.Id);
+            if (topicId != null)
+            {
+                flashcardQuery.Where(f => f.TopicId == topicId);
+            }
+            var flashcards = await flashcardQuery
+                .Take(20)
                 .Include(f => f.FlashcardWords)
                 .ThenInclude(fw => fw.Word)
-                .ThenInclude(w => w.Country)
-                .Include(f => f.FlashcardWords)
-                .ThenInclude(fw => fw.Word)
-                .ThenInclude(w => w.Pronunciations)
-                .Include(f => f.FlashcardWords)
-                .ThenInclude(fw => fw.Word)
-                .ThenInclude(w => w.Images)
-                .ToListAsync()).Select(f => new FlashcardModel(f)).ToList();
+                .ToListAsync();
+            if (flashcards != null)
+            {
+                return _smallFlashcardBuilder.BuildSmallFlashcards(flashcards, countryId);
+            }
+            return new List<SmallFlashcard>();
         }
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<FlashcardModel> GetFlashcard(Guid id)
-        {
-            //return new FlashcardModel();
-            return new FlashcardModel((await _context.Flashcards.FirstOrDefaultAsync(f => f.Id == id)));
-        }
+        //[HttpGet]
+        //[Route("{topicId}")]
+        //public async Task<List<FlashcardModel>> GetFlashcards(Guid topicId)
+        //{
+        //    //return new List<FlashcardModel>();
+        //    return (await _context.Flashcards.Where(f => f.TopicId == topicId)
+        //        .Include(f => f.Topic)
+        //        .ThenInclude(t => t.Subtopics)
+        //        .Include(f => f.FlashcardWords)
+        //        .ThenInclude(fw => fw.Word)
+        //        .ThenInclude(w => w.Country)
+        //        .Include(f => f.FlashcardWords)
+        //        .ThenInclude(fw => fw.Word)
+        //        .ThenInclude(w => w.Pronunciations)
+        //        .Include(f => f.FlashcardWords)
+        //        .ThenInclude(fw => fw.Word)
+        //        .ThenInclude(w => w.Images)
+        //        .ToListAsync()).Select(f => new FlashcardModel(f)).ToList();
+        //}
+
+        //[HttpGet]
+        //[Route("{id}")]
+        //public async Task<FlashcardModel> GetFlashcard(Guid id)
+        //{
+        //    //return new FlashcardModel();
+        //    return new FlashcardModel((await _context.Flashcards.FirstOrDefaultAsync(f => f.Id == id)));
+        //}
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> AddFlashcard(FlashcardModel flashcardModel)
@@ -72,7 +98,7 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
                 {
                     return BadRequest();
                 }
-                return Ok(new FlashcardModel(flashcard));
+                return Ok();
             }
             return BadRequest();
         }

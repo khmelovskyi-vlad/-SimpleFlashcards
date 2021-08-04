@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SimpleFlashcards.Entities.Topics
 {
-    public class SubTopic
+    public class Subtopic
     {
         public Guid Id { get; set; }
         public string Value { get; set; }
@@ -13,5 +13,6 @@ namespace SimpleFlashcards.Entities.Topics
         public DateTime UpdateDate { get; set; }
         public Topic Topic { get; set; }
         public Guid TopicId { get; set; }
+        public List<FlashcardSubtopic> FlashcardSubtopics { get; set; }
     }
 }

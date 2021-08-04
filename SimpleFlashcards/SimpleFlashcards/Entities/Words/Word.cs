@@ -1,5 +1,6 @@
 ﻿using SimpleFlashcards.Entities.Files;
 using SimpleFlashcards.Entities.Flashcards;
+using SimpleFlashcards.Entities.Identities.Base;
 using SimpleFlashcards.Entities.Maps;
 using SimpleFlashcards.Models.Flashcards;
 using SimpleFlashcards.Models.Words;
@@ -21,13 +22,15 @@ namespace SimpleFlashcards.Entities.Words
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
 
-        public Guid CountryId { get; set; }
+        public int? CountryId { get; set; }
         public Country Country { get; set; }
         public List<FlashcardWord> FlashcardWords { get; set; }
         public List<Translation> Translations1 { get; set; }
         public List<Translation> Translations2 { get; set; }
         public List<FileInfoWordPronunciation> Pronunciations { get; set; }
         public List<FileInfoWordImage> Images { get; set; }
+        public Guid? UserId { get; set; }
+        public ApplicationUser User { get; set; }
 
 
         [NotMapped]

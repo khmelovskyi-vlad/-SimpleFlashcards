@@ -46,7 +46,7 @@ namespace SimpleFlashcards.Models.Words
         public string Value { get; set; }
         public string Transcription { get; set; }
         public PartOfSpeech PartOfSpeech { get; set; }
-        public Guid CountryId { get; set; }
+        public int? CountryId { get; set; }
         public CountryModel Country { get; set; }
         public Guid? FlashcardId { get; set; }
         public List<Guid> ImageIds { get; set; }

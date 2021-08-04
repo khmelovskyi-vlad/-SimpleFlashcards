@@ -9,28 +9,41 @@ namespace SimpleFlashcards.Services.Topics.Builders.TopicBuilderService
 {
     public class TopicBuilder : ITopicBuilder
     {
-        public Topic BuildTopic(TopicModel topicModel) 
+        public Topic BuildTopic(TopicModel topicModel, Guid? userId = null) 
         {
+            var now = DateTime.Now;
             var topic = new Topic();
             topic.Id = Guid.NewGuid();
             topic.Value = topicModel.Value;
-            topic.CreationDate = DateTime.Now;
-            topic.UpdateDate = DateTime.Now;
+            topic.CreationDate = now;
+            topic.UpdateDate = now;
+            topic.UserId = userId;
+
+            topicModel.Id = topic.Id;
+            topicModel.UpdateDate = topic.UpdateDate;
+            topicModel.CreationDate = topic.CreationDate;
+            topicModel.IsCreated = true;
             return topic;
         }
-        public SubTopic BuildSubTopic(SubTopicModel subTopicModel, Guid topicId)
+        public Subtopic BuildSubtopic(SubtopicModel subtopicModel, Guid topicId)
         {
-            var subTopic = new SubTopic();
-            subTopic.Id = Guid.NewGuid();
-            subTopic.Value = subTopicModel.Value;
-            subTopic.CreationDate = DateTime.Now;
-            subTopic.UpdateDate = DateTime.Now;
-            subTopic.TopicId = topicId;
-            return subTopic;
+            var subtopic = new Subtopic();
+            subtopic.Id = Guid.NewGuid();
+            subtopic.Value = subtopicModel.Value;
+            subtopic.CreationDate = DateTime.Now;
+            subtopic.UpdateDate = DateTime.Now;
+            subtopic.TopicId = topicId;
+
+            subtopicModel.Id = subtopic.Id;
+            subtopicModel.UpdateDate = subtopic.UpdateDate;
+            subtopicModel.CreationDate = subtopic.CreationDate;
+            subtopicModel.TopicId = subtopic.TopicId;
+            subtopicModel.IsCreated = true;
+            return subtopic;
         }
-        public List<SubTopic> BuildSubTopics(List<SubTopicModel> subTopicModels, Guid topicId)
+        public List<Subtopic> BuildSubtopics(List<SubtopicModel> subtopicModels, Guid topicId)
         {
-            return subTopicModels.Where(subTopicModel => !subTopicModel.IsCreated).Select(subTopicModel => BuildSubTopic(subTopicModel, topicId)).ToList();
+            return subtopicModels.Where(subtopicModel => !subtopicModel.IsCreated).Select(subTopicModel => BuildSubtopic(subTopicModel, topicId)).ToList();
         }
     }
 }

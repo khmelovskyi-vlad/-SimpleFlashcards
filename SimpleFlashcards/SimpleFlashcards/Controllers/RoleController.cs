@@ -35,7 +35,7 @@ namespace SimpleFlashcards.Controllers
         {
 
             var country = new Country() {
-                Id = Guid.NewGuid(),
+                Id = 1,
                 Name = "asd"
             };
             var word = new Word() {

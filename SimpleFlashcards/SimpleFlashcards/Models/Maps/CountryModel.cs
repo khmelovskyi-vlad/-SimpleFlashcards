@@ -17,7 +17,7 @@ namespace SimpleFlashcards.Models.Maps
             Id = country.Id;
             Name = country.Name;
         }
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

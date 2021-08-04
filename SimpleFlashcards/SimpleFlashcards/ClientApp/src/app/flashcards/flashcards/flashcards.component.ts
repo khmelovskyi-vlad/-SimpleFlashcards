@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from '../../models/country';
+import { Country } from '../../models/maps/country';
 import { Word } from '../../models/words/word';
 import { Flashcard } from '../../models/flashcards/flashcard';
+import { SmallFlashcardsApiService } from '../../services/api/flashcards/small-flashcards/small-flashcards-api.service';
 
 @Component({
   selector: 'app-flashcards',
@@ -14,14 +15,15 @@ export class FlashcardsComponent implements OnInit {
   country: Country;
   topic = "";
 
-  constructor() { }
+  constructor(private smallFlashcardsService: SmallFlashcardsApiService) { }
 
   ngOnInit(): void {
+    this.smallFlashcardsService.getFlashcards(1).subscribe(flashcards => console.log(flashcards));
     const firstCountry = new Country();
-    firstCountry.id = '100';
+    firstCountry.id = 100;
     firstCountry.name = 'eng';
     const secondCountry = new Country();
-    secondCountry.id = '101';
+    secondCountry.id = 101;
     secondCountry.name = 'ukr';
     this.country = firstCountry;
 

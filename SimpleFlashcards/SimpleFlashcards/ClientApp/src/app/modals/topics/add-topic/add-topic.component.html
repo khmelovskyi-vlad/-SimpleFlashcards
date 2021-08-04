@@ -1,0 +1,38 @@
+<div class="row m-0 p-0">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-topic">
+    Add topic
+  </button>
+</div>
+
+
+
+<div class="modal fade" id="add-topic" tabindex="-1" aria-labelledby="addTopicModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mainTopicModalLabel">Add topic</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="addTopic" class="form-label">New topic:</label>
+          <input [(ngModel)]="topic.value" type="text" class="form-control" id="addTopic" placeholder="topic">
+        </div>
+        <div *ngFor="let subtopic of topic.subtopics; index as i" class="mb-3">
+          <div class="mb-3">
+            <label [for]="'addSubtopic' + i" class="form-label">New subtopic {{i + 1}}:</label>
+            <input [(ngModel)]="subtopic.value" type="text" class="form-control" 
+            [id]="'addSubtopic' + i" placeholder="subtopic">
+          </div>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" (click)="addSubtopic()">Add subtopic</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addTopic()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

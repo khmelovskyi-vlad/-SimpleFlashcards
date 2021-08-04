@@ -6,26 +6,14 @@ using System.Threading.Tasks;
 
 namespace SimpleFlashcards.Models.Topics
 {
-    public class SubTopicModel
+    public class SubtopicModel
     {
-        public SubTopicModel()
-        {
-
-        }
-        public SubTopicModel(SubTopic subTopic)
-        {
-            Id = subTopic.Id;
-            Value = subTopic.Value;
-            UpdateDate = subTopic.UpdateDate;
-            Topic = subTopic.Topic?.Value;
-            TopicId = subTopic.TopicId;
-            IsCreated = true;
-        }
         public Guid Id { get; set; }
         public string Value { get; set; }
+        public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public string Topic { get; set; }
         public Guid TopicId { get; set; }
-        public bool IsCreated { get; set; }
+        public bool IsCreated { get; set; } = true;
     }
 }

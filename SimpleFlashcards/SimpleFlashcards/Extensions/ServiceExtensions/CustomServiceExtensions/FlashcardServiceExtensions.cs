@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SimpleFlashcards.Services.Flashcards.Builders.FlashcardBuilderService;
+using SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace SimpleFlashcards.Extensions.ServiceExtensions.CustomServiceExtensions
         public static void AddFlashcardServices(this IServiceCollection services)
         {
             services.AddSingleton<IFlashcardBuilder, FlashcardBuilder>();
+            services.AddSingleton<ISmallFlashcardBuilder, SmallFlashcardBuilder>();
         }
     }
 }

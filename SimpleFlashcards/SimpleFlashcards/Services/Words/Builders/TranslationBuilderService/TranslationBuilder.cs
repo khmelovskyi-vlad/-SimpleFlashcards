@@ -19,7 +19,7 @@ namespace SimpleFlashcards.Services.Words.Builders.TranslationBuilderService
             }
             return translations;
         }
-        private List<Translation> GetTranslations(IGrouping<Guid, Word> words1, IGrouping<Guid, Word> words2, List<Word> createdWords)
+        private List<Translation> GetTranslations(IGrouping<int?, Word> words1, IGrouping<int?, Word> words2, List<Word> createdWords)
         {
             var createdWordTranslations = createdWords.SelectMany(cw => cw.Translations1).Union(createdWords.SelectMany(cw => cw.Translations2)).ToList();
             var translations = new List<Translation>();

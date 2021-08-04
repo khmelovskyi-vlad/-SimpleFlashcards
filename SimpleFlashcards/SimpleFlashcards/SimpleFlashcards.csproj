@@ -24,6 +24,40 @@
     <Compile Remove="Migrations\20210731114451_Migr7_ThirdTryAddTranslation.Designer.cs" />
     <Compile Remove="Migrations\20210801121713_Migr10_FifthTryAddTranslation.cs" />
     <Compile Remove="Migrations\20210801121713_Migr10_FifthTryAddTranslation.Designer.cs" />
+    <Compile Remove="Migrations\20210802150512_Migr10_RemoveFlashcardValue.cs" />
+    <Compile Remove="Migrations\20210802150512_Migr10_RemoveFlashcardValue.Designer.cs" />
+    <Compile Remove="Migrations\20210803120032_Migr11_ChangeLanguageIdsFromGuidToLong.cs" />
+    <Compile Remove="Migrations\20210803120032_Migr11_ChangeLanguageIdsFromGuidToLong.Designer.cs" />
+    <Compile Remove="Migrations\20210803120701_Migr12_AddCountriesWithLongIds.cs" />
+    <Compile Remove="Migrations\20210803120701_Migr12_AddCountriesWithLongIds.Designer.cs" />
+    <Compile Remove="Migrations\20210803121144_Migr12_AddCountriesWithLongIds.cs" />
+    <Compile Remove="Migrations\20210803121144_Migr12_AddCountriesWithLongIds.Designer.cs" />
+    <Compile Remove="Migrations\20210803121531_Migr12_AddCountriesWithIntIds.cs" />
+    <Compile Remove="Migrations\20210803121531_Migr12_AddCountriesWithIntIds.Designer.cs" />
+    <Compile Remove="Migrations\20210803122311_Migr12_AddCountriesWithIntIds.cs" />
+    <Compile Remove="Migrations\20210803122311_Migr12_AddCountriesWithIntIds.Designer.cs" />
+    <Compile Remove="Migrations\20210803122805_Migr12_AddCountriesWithIntIds.cs" />
+    <Compile Remove="Migrations\20210803122805_Migr12_AddCountriesWithIntIds.Designer.cs" />
+    <Compile Remove="Migrations\20210803122952_Migr12_AddCountriesWithIntIds.cs" />
+    <Compile Remove="Migrations\20210803122952_Migr12_AddCountriesWithIntIds.Designer.cs" />
+    <Compile Remove="Migrations\20210803123057_Migr12_AddCountriesWithIntIds.cs" />
+    <Compile Remove="Migrations\20210803123057_Migr12_AddCountriesWithIntIds.Designer.cs" />
+    <Compile Remove="Migrations\20210804103149_Migr14_AddFlashcardSubtopics.cs" />
+    <Compile Remove="Migrations\20210804103149_Migr14_AddFlashcardSubtopics.Designer.cs" />
+    <Compile Remove="Migrations\20210804103325_Migr14_AddFlashcardSubtopics.cs" />
+    <Compile Remove="Migrations\20210804103325_Migr14_AddFlashcardSubtopics.Designer.cs" />
+    <Compile Remove="Migrations\20210804120318_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
+    <Compile Remove="Migrations\20210804120318_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
+    <Compile Remove="Migrations\20210804120452_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
+    <Compile Remove="Migrations\20210804120452_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
+    <Compile Remove="Migrations\20210804120947_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
+    <Compile Remove="Migrations\20210804120947_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
+    <Compile Remove="Migrations\20210804121132_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
+    <Compile Remove="Migrations\20210804121132_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
+    <Compile Remove="Migrations\20210804121338_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
+    <Compile Remove="Migrations\20210804121338_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
+    <Compile Remove="Migrations\20210804121624_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
+    <Compile Remove="Migrations\20210804121624_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

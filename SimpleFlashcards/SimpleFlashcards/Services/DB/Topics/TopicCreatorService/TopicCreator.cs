@@ -1,4 +1,5 @@
-﻿using SimpleFlashcards.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleFlashcards.Data;
 using SimpleFlashcards.Entities.Topics;
 using SimpleFlashcards.Models.Topics;
 using SimpleFlashcards.Services.Topics.Builders.TopicBuilderService;
@@ -18,7 +19,7 @@ namespace SimpleFlashcards.Services.DB.Topics.TopicCreatorService
             _context = context;
             _topicBuilder = topicBuilder;
         }
-        public Guid AddTopic(TopicModel topicModel)
+        public Topic AddTopic(TopicModel topicModel, Guid? userId = null)
         {
             Topic topic = new Topic();
             if (topicModel.IsCreated)
@@ -27,15 +28,26 @@ namespace SimpleFlashcards.Services.DB.Topics.TopicCreatorService
             }
             else
             {
-                topic = _topicBuilder.BuildTopic(topicModel);
+                topic = _topicBuilder.BuildTopic(topicModel, userId);
                 _context.Topics.Add(topic);
             }
-            if (topicModel.SubTopics != null)
+            if (topicModel.Subtopics != null)
             {
-                var subTopics = _topicBuilder.BuildSubTopics(topicModel.SubTopics, topic.Id);
-                _context.SubTopics.AddRange(subTopics);
+                AddSubtopics(topicModel.Subtopics, topic.Id);
             }
-            return topic.Id;
+            return topic;
+        }
+        public Subtopic AddSubtopic(SubtopicModel subtopicModel)
+        {
+            var subtopic = _topicBuilder.BuildSubtopic(subtopicModel, subtopicModel.TopicId);
+            _context.Subtopics.Add(subtopic);
+            return subtopic;
+        }
+        public List<Subtopic> AddSubtopics(List<SubtopicModel> subtopicModels, Guid topicId)
+        {
+            var subtopics = _topicBuilder.BuildSubtopics(subtopicModels, topicId);
+            _context.Subtopics.AddRange(subtopics);
+            return subtopics;
         }
     }
 }

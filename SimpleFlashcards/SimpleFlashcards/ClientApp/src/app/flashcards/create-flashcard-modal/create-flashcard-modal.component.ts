@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
-import { LanguagesService } from '../../services/languages/languages.service';
+import { LanguagesService } from '../../services/general-data/languages/languages.service';
 import { Flashcard } from '../../models/flashcards/flashcard';
 import { Word } from '../../models/words/word';
 import { ImgInfo } from '../../models/images/img-info';
+
 
 @Component({
   selector: 'app-create-flashcard-modal',
@@ -15,8 +16,9 @@ export class CreateFlashcardModalComponent implements OnInit {
   newFlashcard = new Flashcard();
   images: File[][] = [];
   imgInfo: ImgInfo[][] = [];
-  
+
   constructor(public languagesService: LanguagesService) { }
+  
 
   ngOnInit(): void {
     this.addWord(true);
@@ -55,6 +57,11 @@ export class CreateFlashcardModalComponent implements OnInit {
     this.images.push([]);
     this.imgInfo.push([]);
   }
+
+  foo(){
+    
+  }
+
   // foo(): string[]{
   //   const res: string[] = [];
   //   for (let i = 0; i < this.images.length; i++) {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SimpleFlashcards.Entities.Flashcards;
 using SimpleFlashcards.Entities.Identities.Ips;
+using SimpleFlashcards.Entities.Topics;
+using SimpleFlashcards.Entities.Words;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,9 @@ namespace SimpleFlashcards.Entities.Identities.Base
         public List<ApplicationUserLogin> Logins { get; set; }
         public List<ApplicationUserToken> Tokens { get; set; }
         public List<ApplicationUserRole> UserRoles { get; set; }
-        //public List<Flashcard> Flashcards { get; set; }
+
+        public List<Flashcard> Flashcards { get; set; }
+        public List<Word> Words { get; set; }
+        public List<Topic> Topics { get; set; }
     }
 }

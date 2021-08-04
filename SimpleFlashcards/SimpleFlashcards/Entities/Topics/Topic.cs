@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SimpleFlashcards.Entities.Flashcards;
+using SimpleFlashcards.Entities.Identities.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +13,9 @@ namespace SimpleFlashcards.Entities.Topics
         public string Value { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
-        public List<SubTopic> SubTopics { get; set; }
+        public List<Subtopic> Subtopics { get; set; }
+        public List<Flashcard> Flashcards { get; set; }
+        public Guid? UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

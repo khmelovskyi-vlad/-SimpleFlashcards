@@ -38,7 +38,7 @@ namespace SimpleFlashcards.Services.DB.Flashcards.FlashcardCreatorService
         public async Task<Flashcard> AddFlashcard(FlashcardModel flashcardModel, Guid userId)
         {
             flashcardModel.Words = flashcardModel.Words ?? new List<WordModel>();
-            var topicId = _topicCreator.AddTopic(flashcardModel.Topic);
+            var topicId = _topicCreator.AddTopic(flashcardModel.Topic, userId).Id;
             var flashcard = _flashcardBuilder.BuildFlashcard(flashcardModel, userId, topicId);
             _context.Add(flashcard);
             await _wordCreator.AddWords(flashcardModel.Words, flashcard.Id);
