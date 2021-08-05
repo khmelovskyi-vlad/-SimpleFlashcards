@@ -23,7 +23,7 @@ namespace SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderSer
             };
             return smallFlashcards;
         }
-        public List<SmallFlashcard> BuildSmallFlashcards(List<Flashcard> flashcards, int countryId)
+        public List<SmallFlashcard> BuildSmallFlashcards(List<Flashcard> flashcards, int languageId)
         {
             var smallFlashcards = new List<SmallFlashcard>();
             foreach (var flashcard in flashcards)
@@ -31,7 +31,7 @@ namespace SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderSer
                 smallFlashcards.AddRange(flashcard.FlashcardWords
                                             .Where(fw => fw.IsMain)
                                             .Select(fw => fw.Word)
-                                            .Where(w => w.CountryId == countryId)
+                                            .Where(w => w.LanguageId == languageId)
                                             .Select(w => BuildSmallFlashcard(w, flashcard)));
             }
             return smallFlashcards;

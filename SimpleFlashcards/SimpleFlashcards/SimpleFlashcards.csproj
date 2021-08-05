@@ -58,6 +58,8 @@
     <Compile Remove="Migrations\20210804121338_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
     <Compile Remove="Migrations\20210804121624_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.cs" />
     <Compile Remove="Migrations\20210804121624_Migr15_AddUserToTopicAndWordAddFlashcardsToTopic.Designer.cs" />
+    <Compile Remove="Migrations\20210805082314_Migr16_AddLanguages.cs" />
+    <Compile Remove="Migrations\20210805082314_Migr16_AddLanguages.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

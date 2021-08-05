@@ -21,7 +21,7 @@ namespace SimpleFlashcards.Services.Words.Builders.WordBuilderService
             word.PartOfSpeech = wordModel.PartOfSpeech;
             word.CreationDate = DateTime.Now;
             word.UpdateDate = DateTime.Now;
-            word.CountryId = wordModel.CountryId;
+            word.LanguageId = wordModel.LanguageId;
             word.IsMain = wordModel.IsMain;
             word.IsCreated = wordModel.IsCreated;
             return word;

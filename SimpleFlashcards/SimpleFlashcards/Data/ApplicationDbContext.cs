@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SimpleFlashcards.Data.Initializers;
 using SimpleFlashcards.Entities.Files;
 using SimpleFlashcards.Entities.Flashcards;
 using SimpleFlashcards.Entities.Identities.Base;
@@ -24,6 +25,7 @@ namespace SimpleFlashcards.Data
         public DbSet<UserIp> UserIps { get; set; }
 
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         public DbSet<FileInfoWordImage> FileInfoWordImages { get; set; }
         public DbSet<FileInfoWordPronunciation> FileInfoWordPronunciations { get; set; }
@@ -45,6 +47,7 @@ namespace SimpleFlashcards.Data
             modelBuilder.AddForeignKeys();
             modelBuilder.AddIdentityNavigation();
             modelBuilder.AddDefaultValues();
+            modelBuilder.Seed(new FirstInitializer());
         }
     }
 }

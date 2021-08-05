@@ -1,13 +1,13 @@
 import { PartOfSpeech } from "../../value-objects/part-of-speech";
-import { Country } from "../maps/country";
+import { Language } from "../maps/language";
 
 export class Word{
   id: string;
   value: string;
   transcription: string;
   partOfSpeech: PartOfSpeech = PartOfSpeech.no;
-  countryId: number;
-  country: Country;
+  languageId: number;
+  language: Language;
   flashcardId: string;
   pronunciationIds: string[];
   imageIds: string[];

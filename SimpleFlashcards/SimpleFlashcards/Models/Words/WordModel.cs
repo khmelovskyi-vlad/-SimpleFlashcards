@@ -12,42 +12,12 @@ namespace SimpleFlashcards.Models.Words
 {
     public class WordModel
     {
-        public WordModel()
-        {
-
-        }
-        public WordModel(FlashcardWord flashcardWord)
-        {
-            if (flashcardWord?.Word != null)
-            {
-                var word = flashcardWord.Word;
-                Id = word.Id;
-                Value = word.Value;
-                Transcription = word.Transcription;
-                PartOfSpeech = word.PartOfSpeech;
-                if (word.Country != null)
-                {
-                    CountryId = word.CountryId;
-                    Country = new CountryModel(word.Country);
-                }
-                if (word.Pronunciations != null)
-                {
-                    PronunciationIds = word.Pronunciations.Select(el => el.Id).ToList();
-                }
-                if (word.Images != null)
-                {
-                    ImageIds = word.Images.Select(el => el.Id).ToList();
-                }
-                IsMain = flashcardWord.IsMain;
-                IsCreated = true;
-            }
-        }
         public Guid Id { get; set; }
         public string Value { get; set; }
         public string Transcription { get; set; }
         public PartOfSpeech PartOfSpeech { get; set; }
-        public int? CountryId { get; set; }
-        public CountryModel Country { get; set; }
+        public int? LanguageId { get; set; }
+        public LanguageModel Language { get; set; }
         public Guid? FlashcardId { get; set; }
         public List<Guid> ImageIds { get; set; }
         public List<Guid> PronunciationIds { get; set; }

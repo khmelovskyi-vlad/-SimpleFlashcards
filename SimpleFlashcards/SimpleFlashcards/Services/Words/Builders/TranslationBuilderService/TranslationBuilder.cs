@@ -12,7 +12,7 @@ namespace SimpleFlashcards.Services.Words.Builders.TranslationBuilderService
         public List<Translation> BuildTranslations(List<Word> newWords, List<Word> createdWords)
         {
             var translations = new List<Translation>();
-            var newWordsGroup = newWords.GroupBy(wm => wm.CountryId).ToList();
+            var newWordsGroup = newWords.GroupBy(wm => wm.LanguageId).ToList();
             for (int i = 0; i < newWordsGroup.Count - 1; i++)
             {
                 translations.AddRange(GetTranslations(newWordsGroup[i], newWordsGroup[i + 1], createdWords));

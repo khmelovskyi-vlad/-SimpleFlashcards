@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { TopicsApiService } from '../../../services/api/topics/topics-api.service';
 import { GeneralDataService } from '../../../services/general-data/general-data.service';
 import { Topic } from '../../../models/topics/topic';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-edit-topics',
@@ -16,7 +17,10 @@ export class EditTopicsComponent implements OnInit {
   searchEditTopic: string = '';
   receivedTopics: Topic[];
 
-  constructor(private generalData: GeneralDataService, private topicsApiService: TopicsApiService) { }
+  modalRef: BsModalRef;
+  constructor(private generalData: GeneralDataService, 
+    private topicsApiService: TopicsApiService, 
+    private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.generalData.topics.selectedTopic.subscribe(topic => {
@@ -36,6 +40,10 @@ export class EditTopicsComponent implements OnInit {
     this.searchTopics.next(part);
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+  
   selectTopic(topic: Topic): void{
     
   }

@@ -36,8 +36,8 @@ export class FlashcardsComponent implements OnInit {
     word1.flashcardId = flashcard1.id;
     word1.transcription = 'some tr';
     word1.value = 'some word';
-    word1.countryId = firstCountry.id;
-    word1.country = firstCountry;
+    word1.languageId = firstCountry.id;
+    word1.language = firstCountry;
     flashcard1.words.push(word1);
 
     const word2 = new Word();
@@ -45,8 +45,8 @@ export class FlashcardsComponent implements OnInit {
     word2.flashcardId = flashcard1.id;
     word2.transcription = 'some tr2';
     word2.value = 'some word2';
-    word2.countryId = firstCountry.id;
-    word2.country = firstCountry;
+    word2.languageId = firstCountry.id;
+    word2.language = firstCountry;
     flashcard1.words.push(word2);
 
     const flashcard2 = new Flashcard();
@@ -58,8 +58,8 @@ export class FlashcardsComponent implements OnInit {
     word3.flashcardId = flashcard2.id;
     word3.transcription = 'some tr3';
     word3.value = 'some word3';
-    word3.countryId = firstCountry.id;
-    word3.country = firstCountry;
+    word3.languageId = firstCountry.id;
+    word3.language = firstCountry;
     flashcard2.words.push(word3);
 
     const word4 = new Word();
@@ -67,8 +67,8 @@ export class FlashcardsComponent implements OnInit {
     word4.flashcardId = flashcard2.id;
     word4.transcription = 'some tr4';
     word4.value = 'some word4';
-    word4.countryId = firstCountry.id;
-    word4.country = firstCountry;
+    word4.languageId = firstCountry.id;
+    word4.language = firstCountry;
     flashcard2.words.push(word4);
 
     this.flashcards.push(flashcard1);
@@ -83,7 +83,7 @@ export class FlashcardsComponent implements OnInit {
     const words: Word[] = [];
     if(this.flashcards && this.flashcards){
       for (let i = 0; i < this.flashcards.length; i++) {
-        const word = this.flashcards[i].words.find(w => w.countryId == this.country.id);
+        const word = this.flashcards[i].words.find(w => w.languageId == this.country.id);
         if (word) {
           words.push(word);
         }
@@ -93,7 +93,7 @@ export class FlashcardsComponent implements OnInit {
   }
   getWord(flashcard: Flashcard): Word{
     if(flashcard && flashcard.words){
-      return flashcard.words.find(w => w.countryId == this.country.id);
+      return flashcard.words.find(w => w.languageId == this.country.id);
     }
     return undefined;
   }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Country } from '../../../models/maps/country';
+import { Language } from '../../../models/maps/language';
 import { ErrorHandlerService } from '../../error-handler/error-handler.service';
 import { UrlCreatorService } from '../../url-creator/url-creator.service';
 
@@ -14,31 +14,16 @@ import { catchError } from 'rxjs/operators';
 })
 export class LanguagesService {
 
-  public languages: Country[] = [];
+  public languages: Language[] = [];
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService, private urlCreator: UrlCreatorService) {
-    console.log('foo');
-    console.log('foo');
-    console.log('foo');
-    console.log('foo');
-    console.log('foo');
-    this.getLanguages().subscribe(countries => console.log(countries));
+    this.getLanguages().subscribe(languages => this.languages = languages);
    }
   
-  getLanguages(): Observable<Country[]>{
-    const country = new Country();
-    country.id = 1;
-    country.name = 'Ukraine';
-    const country2 = new Country();
-    country2.id = 2;
-    country2.name = 'Eng';
-    this.languages.push(country);
-    this.languages.push(country2);
-
+  getLanguages(): Observable<Language[]>{
     const url = this.urlCreator.createMainApiUrl([languagePath.StartPath]);
-    return this.http.get<Country[]>(url)
-    .pipe(
-      catchError(this.errorHandler.handleError<Country[]>('getLanguages'))
-    );
-
+    return this.http.get<Language[]>(url)
+            .pipe(
+              catchError(this.errorHandler.handleError<Language[]>('getLanguages'))
+            );
   }
 }

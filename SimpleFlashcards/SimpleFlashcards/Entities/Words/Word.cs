@@ -22,8 +22,8 @@ namespace SimpleFlashcards.Entities.Words
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
 
-        public int? CountryId { get; set; }
-        public Country Country { get; set; }
+        public int? LanguageId { get; set; }
+        public Language Language { get; set; }
         public List<FlashcardWord> FlashcardWords { get; set; }
         public List<Translation> Translations1 { get; set; }
         public List<Translation> Translations2 { get; set; }

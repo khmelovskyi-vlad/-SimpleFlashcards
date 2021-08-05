@@ -34,37 +34,40 @@ namespace SimpleFlashcards.Controllers
         public async Task<ViewResult> Index()
         {
 
-            var country = new Country() {
-                Id = 1,
-                Name = "asd"
-            };
-            var word = new Word() {
-                Id = Guid.NewGuid(),
-                CountryId = country.Id,
-                Value = "word1"
-            };
-            var word2 = new Word()
-            {
-                Id = Guid.NewGuid(),
-                CountryId = country.Id,
-                Value = "word2"
-            };
-            var translation = new Translation() { 
-                WordId1 = word.Id,
-                WordId2 = word2.Id
-            };
-            _context.Countries.Add(country);
-            _context.Words.Add(word);
-            _context.Words.Add(word2);
-            _context.Translations.Add(translation);
-            await _context.SaveChangesAsync();
-            var words = await _context.Words.ToListAsync();
-            var trans = await _context.Translations.Include(t => t.Word1).Include(t => t.Word2).ToListAsync();
-            var wordToDel = words.FirstOrDefault(el => el.Value == "word2");
-            _context.Words.Remove(wordToDel);
-            _context.Translations.RemoveRange(trans.Where(el => el.WordId1 == wordToDel.Id || el.WordId2 == wordToDel.Id));
-            await _context.SaveChangesAsync();
-            var trans2 = await _context.Translations.Include(t => t.Word1).Include(t => t.Word2).ToListAsync();
+            //var country = new Country() {
+            //    Id = 1,
+            //    Name = "asd"
+            //};
+            //var word = new Word() {
+            //    Id = Guid.NewGuid(),
+            //    CountryId = country.Id,
+            //    Value = "word1"
+            //};
+            //var word2 = new Word()
+            //{
+            //    Id = Guid.NewGuid(),
+            //    CountryId = country.Id,
+            //    Value = "word2"
+            //};
+            //var translation = new Translation() { 
+            //    WordId1 = word.Id,
+            //    WordId2 = word2.Id
+            //};
+            //_context.Countries.Add(country);
+            //_context.Words.Add(word);
+            //_context.Words.Add(word2);
+            //_context.Translations.Add(translation);
+            //await _context.SaveChangesAsync();
+            //var words = await _context.Words.ToListAsync();
+            //var trans = await _context.Translations.Include(t => t.Word1).Include(t => t.Word2).ToListAsync();
+            //var wordToDel = words.FirstOrDefault(el => el.Value == "word2");
+            //_context.Words.Remove(wordToDel);
+            //_context.Translations.RemoveRange(trans.Where(el => el.WordId1 == wordToDel.Id || el.WordId2 == wordToDel.Id));
+            //await _context.SaveChangesAsync();
+            //var trans2 = await _context.Translations.Include(t => t.Word1).Include(t => t.Word2).ToListAsync();
+
+
+
             ////var adsasd = await _context.FlashcardWords.Where(el => el.Transcription != "ok").ToListAsync();
             ////_context.FlashcardWords.RemoveRange(adsasd);
             //var country = await _context.Countries.FirstOrDefaultAsync();

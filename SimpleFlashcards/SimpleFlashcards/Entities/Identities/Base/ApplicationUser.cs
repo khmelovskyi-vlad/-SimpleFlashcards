@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SimpleFlashcards.Entities.Flashcards;
 using SimpleFlashcards.Entities.Identities.Ips;
+using SimpleFlashcards.Entities.Maps;
 using SimpleFlashcards.Entities.Topics;
 using SimpleFlashcards.Entities.Words;
 using System;
@@ -26,5 +27,7 @@ namespace SimpleFlashcards.Entities.Identities.Base
         public List<Flashcard> Flashcards { get; set; }
         public List<Word> Words { get; set; }
         public List<Topic> Topics { get; set; }
+        public int? CountryId { get; set; }
+        public Country Country { get; set; }
     }
 }

@@ -11,6 +11,6 @@ namespace SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderSer
     public interface ISmallFlashcardBuilder
     {
         SmallFlashcard BuildSmallFlashcard(Word word, Flashcard flashcard);
-        List<SmallFlashcard> BuildSmallFlashcards(List<Flashcard> flashcards, int countryId);
+        List<SmallFlashcard> BuildSmallFlashcards(List<Flashcard> flashcards, int languageId);
     }
 }

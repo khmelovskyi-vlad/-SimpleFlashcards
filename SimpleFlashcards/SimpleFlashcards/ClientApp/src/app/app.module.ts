@@ -9,6 +9,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { FlashcardsModule } from './flashcards/flashcards.module';
 import { ConfirmationDialogComponent } from './confirmations/confirmation-dialog/confirmation-dialog.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 // import { AuthModule, LogLevel, OidcConfigService } from 'angular-auth-oidc-client';
 // export function configureAuth(oidcConfigService: OidcConfigService) {
@@ -38,7 +39,9 @@ import { ConfirmationDialogComponent } from './confirmations/confirmation-dialog
 
     GoodRoutingModule,
 
-    AuthConfigModule
+    AuthConfigModule,
+
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

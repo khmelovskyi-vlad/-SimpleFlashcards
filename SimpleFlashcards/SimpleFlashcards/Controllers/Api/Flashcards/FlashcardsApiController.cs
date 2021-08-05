@@ -34,9 +34,8 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
             _smallFlashcardBuilder = smallFlashcardBuilder;
         }
         [HttpGet]
-        //[Route("{countryId}")]
-        [Route("{countryId}/{topicId?}")]
-        public async Task<List<SmallFlashcard>> GetFlashcards(int countryId, Guid? topicId = null)
+        [Route("{languageId}/{topicId?}")]
+        public async Task<List<SmallFlashcard>> GetFlashcards(int languageId, Guid? topicId = null)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
             var flashcardQuery = _context.Flashcards.Where(f => f.UserId == user.Id);
@@ -51,7 +50,7 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
                 .ToListAsync();
             if (flashcards != null)
             {
-                return _smallFlashcardBuilder.BuildSmallFlashcards(flashcards, countryId);
+                return _smallFlashcardBuilder.BuildSmallFlashcards(flashcards, languageId);
             }
             return new List<SmallFlashcard>();
         }
