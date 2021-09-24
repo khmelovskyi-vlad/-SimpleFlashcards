@@ -68,6 +68,8 @@ namespace SimpleFlashcards.Extensions
                 .HasKey(t => new { t.WordId1, t.WordId2 });
             modelBuilder.Entity<FlashcardSubtopic>()
                 .HasKey(fs => new { fs.FlashcardId, fs.SubtopicId });
+            modelBuilder.Entity<FlashcardTopic>()
+                .HasKey(fs => new { fs.FlashcardId, fs.TopicId });
 
         }
         public static void AddForeignKeys(this ModelBuilder modelBuilder)

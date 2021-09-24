@@ -37,6 +37,16 @@ namespace SimpleFlashcards.Services.DB.Topics.TopicCreatorService
             }
             return topic;
         }
+        public List<Topic> AddTopics(List<TopicModel> topicModels, Guid? userId = null)
+        {
+            List<Topic> topics = new List<Topic>();
+            foreach (var topicModel in topicModels)
+            {
+                Topic topic = AddTopic(topicModel, userId);
+                topics.Add(topic);
+            }
+            return topics;
+        }
         public Subtopic AddSubtopic(SubtopicModel subtopicModel)
         {
             var subtopic = _topicBuilder.BuildSubtopic(subtopicModel, subtopicModel.TopicId);

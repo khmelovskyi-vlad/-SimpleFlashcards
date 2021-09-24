@@ -10,14 +10,13 @@ namespace SimpleFlashcards.Services.Flashcards.Builders.FlashcardBuilderService
 {
     public class FlashcardBuilder : IFlashcardBuilder
     {
-        public Flashcard BuildFlashcard(FlashcardModel flashcardModel, Guid userId, Guid? topicId)
+        public Flashcard BuildFlashcard(FlashcardModel flashcardModel, Guid userId)
         {
             var flashcard = new Flashcard();
             flashcard.Id = Guid.NewGuid();
             flashcard.CreationDate = DateTime.Now;
             flashcard.UpdateDate = DateTime.Now;
             flashcard.UserId = userId;
-            flashcard.TopicId = topicId;
             return flashcard;
         }
         public List<FlashcardWord> BuildFlashcardWords(List<Word> words, List<Word> createdWords, Guid flashcardId)

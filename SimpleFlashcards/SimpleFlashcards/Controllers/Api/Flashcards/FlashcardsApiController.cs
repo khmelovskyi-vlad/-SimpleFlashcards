@@ -8,6 +8,7 @@ using SimpleFlashcards.Entities.Words;
 using SimpleFlashcards.Models.Flashcards;
 using SimpleFlashcards.Models.Words;
 using SimpleFlashcards.Services.DB.Flashcards.FlashcardCreatorService;
+using SimpleFlashcards.Services.DB.Topics.FlashcardTopicEditorService;
 using SimpleFlashcards.Services.Flashcards.Builders.FlashcardBuilderService;
 using SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderService;
 using SimpleFlashcards.Services.Words.Builders.TranslationBuilderService;
@@ -27,21 +28,23 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
         private ApplicationDbContext _context { get; set; }
         private IFlashcardCreator _flashcardCreator { get; set; }
         private ISmallFlashcardBuilder _smallFlashcardBuilder { get; set; }
-        public FlashcardsApiController(ApplicationDbContext context, IFlashcardCreator flashcardCreator, ISmallFlashcardBuilder smallFlashcardBuilder)
+        private IFlashcardTopicEditor _flashcardTopicEditor { get; set; }
+        public FlashcardsApiController(ApplicationDbContext context, IFlashcardCreator flashcardCreator, ISmallFlashcardBuilder smallFlashcardBuilder, IFlashcardTopicEditor flashcardTopicEditor)
         {
             _context = context;
             _flashcardCreator = flashcardCreator;
             _smallFlashcardBuilder = smallFlashcardBuilder;
+            _flashcardTopicEditor = flashcardTopicEditor;
         }
-        [HttpGet]
-        [Route("{languageId}/{topicId?}")]
-        public async Task<List<SmallFlashcard>> GetFlashcards(int languageId, Guid? topicId = null)
+        [HttpPost]
+        [Route("{languageId}")]
+        public async Task<List<SmallFlashcard>> GetFlashcards(int languageId, List<Guid> topics)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
             var flashcardQuery = _context.Flashcards.Where(f => f.UserId == user.Id);
-            if (topicId != null)
+            if (topics != null)
             {
-                flashcardQuery.Where(f => f.TopicId == topicId);
+                flashcardQuery.Where(f => f.FlashcardTopics.Any(ft => topics.Any(id => id == ft.TopicId)));
             }
             var flashcards = await flashcardQuery
                 .Take(20)
@@ -108,12 +111,9 @@ namespace SimpleFlashcards.Controllers.Api.Flashcards
             if (flashcardModel != null)
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
-                var flashcard = await _context.Flashcards.FirstOrDefaultAsync(f => f.Id == flashcardModel.Id);
+                var flashcard = await _context.Flashcards.Include(f => f.FlashcardTopics).FirstOrDefaultAsync(f => f.Id == flashcardModel.Id);
                 flashcard.UpdateDate = DateTime.Now;
-                if (flashcardModel.Topic.Id != null)
-                {
-                    flashcard.TopicId = flashcardModel.Topic.Id;
-                }
+                _flashcardTopicEditor.ChangeFlashcardTopics(flashcard.FlashcardTopics ?? new List<Entities.Topics.FlashcardTopic>(), flashcardModel.Topics ?? new List<Models.Topics.TopicModel>(), flashcard.Id);
                 await _context.SaveChangesAsync();
             }
             return BadRequest();

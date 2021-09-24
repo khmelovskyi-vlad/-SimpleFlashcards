@@ -7,6 +7,7 @@ using SimpleFlashcards.Entities.Topics;
 using SimpleFlashcards.Entities.Words;
 using SimpleFlashcards.Models.Flashcards;
 using SimpleFlashcards.Models.Words;
+using SimpleFlashcards.Services.DB.Topics.FlashcardTopicCreatorService;
 using SimpleFlashcards.Services.DB.Topics.TopicCreatorService;
 using SimpleFlashcards.Services.DB.Words.WordCreatorService;
 using SimpleFlashcards.Services.Flashcards.Builders.FlashcardBuilderService;
@@ -25,22 +26,26 @@ namespace SimpleFlashcards.Services.DB.Flashcards.FlashcardCreatorService
         private IFlashcardBuilder _flashcardBuilder { get; set; }
         private ITopicCreator _topicCreator { get; set; }
         private IWordCreator _wordCreator { get; set; }
+        private IFlashcardTopicCreator _flashcardTopicCreator { get; set; }
         public FlashcardCreator(ApplicationDbContext context,
             IFlashcardBuilder flashcardBuilder,
             ITopicCreator topicCreator,
-            IWordCreator wordCreator)
+            IWordCreator wordCreator,
+            IFlashcardTopicCreator flashcardTopicCreator)
         {
             _context = context;
             _flashcardBuilder = flashcardBuilder;
             _topicCreator = topicCreator;
             _wordCreator = wordCreator;
+            _flashcardTopicCreator = flashcardTopicCreator;
         }
         public async Task<Flashcard> AddFlashcard(FlashcardModel flashcardModel, Guid userId)
         {
             flashcardModel.Words = flashcardModel.Words ?? new List<WordModel>();
-            var topicId = _topicCreator.AddTopic(flashcardModel.Topic, userId).Id;
-            var flashcard = _flashcardBuilder.BuildFlashcard(flashcardModel, userId, topicId);
+            var topics = _topicCreator.AddTopics(flashcardModel.Topics, userId);
+            var flashcard = _flashcardBuilder.BuildFlashcard(flashcardModel, userId);
             _context.Add(flashcard);
+            _flashcardTopicCreator.AddFlashcardTopics(topics.Select(t => t.Id), flashcard.Id);
             await _wordCreator.AddWords(flashcardModel.Words, flashcard.Id);
             await AddImages(flashcardModel.Words);
             await AddPronunciations(flashcardModel.Words);

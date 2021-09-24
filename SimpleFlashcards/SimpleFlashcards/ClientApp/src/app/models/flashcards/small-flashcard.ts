@@ -4,5 +4,5 @@ export class SmallFlashcard{
   wordId: string;
   word: string;
   transcription: string;
-  topicId: string;
+  topicIds: string[];
 }

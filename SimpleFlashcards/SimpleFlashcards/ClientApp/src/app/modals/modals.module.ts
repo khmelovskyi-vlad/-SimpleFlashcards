@@ -7,7 +7,7 @@ import { AddTopicComponent } from './topics/add-topic/add-topic.component';
 import { FormsModule } from '@angular/forms';
 import { SelectTopicComponent } from './topics/select-topic/select-topic.component';
 import { EditTopicsComponent } from './topics/edit-topics/edit-topics.component';
-import { SelectTopicsComponent } from './topisc/select-topics/select-topics.component';
+import { SelectTopicsComponent } from './topics/select-topics/select-topics.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { SelectTopicsComponent } from './topisc/select-topics/select-topics.comp
     AddTopicComponent,
     SelectTopicComponent,
     EditTopicsComponent,
-    SelectTopicsComponent
+    SelectTopicsComponent,
   ],
   imports: [
     CommonModule,

@@ -16,13 +16,10 @@ export class SmallFlashcardsApiService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService, private urlCreator: UrlCreatorService) { }
 
-  getFlashcards(countryId: number, topicId: string = undefined): Observable<SmallFlashcard[]>{
+  getFlashcards(countryId: number, topics: string[] = undefined): Observable<SmallFlashcard[]>{
     const pathParts = [flashcardPath.StartPath, countryId.toString()];
-    if (topicId){
-      pathParts.push(topicId);
-    }
     const url = this.urlCreator.createMainApiUrl(pathParts);
-    return this.http.get<SmallFlashcard[]>(url)
+    return this.http.post<SmallFlashcard[]>(url, topics)
     .pipe(
       catchError(this.errorHandler.handleError<SmallFlashcard[]>('getFlashcards'))
     );

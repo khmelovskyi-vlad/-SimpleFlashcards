@@ -10,7 +10,7 @@ namespace SimpleFlashcards.Services.Flashcards.Builders.FlashcardBuilderService
 {
     public interface IFlashcardBuilder
     {
+        Flashcard BuildFlashcard(FlashcardModel flashcardModel, Guid userId);
         List<FlashcardWord> BuildFlashcardWords(List<Word> words, List<Word> createdWords, Guid flashcardId);
-        Flashcard BuildFlashcard(FlashcardModel flashcardModel, Guid userId, Guid? topicId);
     }
 }

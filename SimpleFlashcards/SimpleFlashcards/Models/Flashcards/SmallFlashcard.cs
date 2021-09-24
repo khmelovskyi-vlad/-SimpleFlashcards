@@ -13,6 +13,6 @@ namespace SimpleFlashcards.Models.Flashcards
         public Guid WordId { get; set; }
         public string Word { get; set; }
         public string Transcription { get; set; }
-        public Guid? TopicId { get; set; }
+        public List<Guid> TopicIds { get; set; }
     }
 }

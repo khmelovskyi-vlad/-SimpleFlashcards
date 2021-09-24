@@ -15,7 +15,6 @@ namespace SimpleFlashcards.Models.Flashcards
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public List<WordModel> Words { get; set; }
-        public Guid? TopicId { get; set; }
-        public TopicModel Topic { get; set; }
+        public List<TopicModel> Topics { get; set; }
     }
 }

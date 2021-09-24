@@ -16,7 +16,7 @@ namespace SimpleFlashcards.Services.Flashcards.Builders.SmallFlashcardBuilderSer
             {
                 Id = flashcard.Id,
                 UpdateDate = flashcard.UpdateDate,
-                TopicId = flashcard.TopicId,
+                TopicIds = flashcard?.FlashcardTopics?.Select(ft => ft.TopicId)?.ToList() ?? new List<Guid>(),
                 Transcription = word.Transcription,
                 WordId = word.Id,
                 Word = word.Value
