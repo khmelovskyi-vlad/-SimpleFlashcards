@@ -1,4 +1,4 @@
-<button *ngIf="showButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#main-topic">
+<!-- <button *ngIf="showButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#main-topic">
   Change topic
 </button>
 
@@ -28,4 +28,39 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+<button *ngIf="showButton" type="button" class="btn btn-primary" (click)="openModal(template)">
+  Change topic
+</button>
+
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <div *ngIf="generalData.topics.topic != undefined; else elseBlock">
+      <h5 class="modal-title" id="mainTopicModalLabel">Your current topic is:</h5>
+      <h3>{{generalData.topics.topic.value}}</h3>
+    </div>
+    <ng-template #elseBlock>
+      <h5 class="modal-title" id="mainTopicModalLabel">You don't have topic</h5>
+    </ng-template>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <app-select-topic></app-select-topic>
+    </div>
+    <div class="mb-3">
+      <app-add-topic></app-add-topic>
+    </div>
+    <div>
+      <app-edit-topics [closeModalId]="modalId"></app-edit-topics>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</ng-template>

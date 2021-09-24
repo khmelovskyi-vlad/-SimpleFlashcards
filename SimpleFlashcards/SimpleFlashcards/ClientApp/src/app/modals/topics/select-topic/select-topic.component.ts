@@ -14,18 +14,18 @@ export class SelectTopicComponent implements OnInit {
 
 
   private searchTopics = new Subject<string>();
-  topic: Topic;
+  topics: Topic[];
   receivedTopics: Topic[];
   
   constructor(public generalData: GeneralDataService, private topicsApiService: TopicsApiService) { }
 
   ngOnInit(): void {
-    this.generalData.topics.selectedTopic.subscribe(topic => {
-      if (topic) {
-        this.topic = topic;
+    this.generalData.topics.selectedTopics.subscribe(topics => {
+      if (topics) {
+        this.topics = topics;
       }
       else {
-        this.topic = new Topic();
+        this.topics = [];
       }
     });
     
@@ -37,7 +37,7 @@ export class SelectTopicComponent implements OnInit {
   }
   
   selectTopic(topic: Topic): void{
-    this.generalData.topics.topic = topic;
+    // this.generalData.topics.topics = topic;
   }
   
   onSearchTopics(part: string): void {

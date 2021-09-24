@@ -1,13 +1,11 @@
-<div class="row m-0 p-0">
-  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-topics"> -->
-  <button type="button" class="btn btn-primary" (click)="openModal(template)">
+<!-- <div class="row m-0 p-0">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-topics">
     Change topics
   </button>
 </div>
 
 
-
-<!-- <div class="modal fade" id="edit-topics" tabindex="-1" aria-labelledby="editTopicsModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit-topics" tabindex="-1" aria-labelledby="editTopicsModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -31,8 +29,15 @@
   </div>
 </div> -->
 
+
+<div class="row m-0 p-0">
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">
+    Change topics
+  </button>
+</div>
+
+
 <ng-template #template>
-  
   <div class="modal-header">
     <h5 class="modal-title" id="editTopicsModalLabel">Change topics</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

@@ -10,19 +10,25 @@ export class TopicsService {
 
   private key = "topic";
 
-  selectedTopic = new BehaviorSubject(this.topic);
+  selectedTopics = new BehaviorSubject(this.topics);
   constructor(private subtopicsService: SubtopicsService) { }
   
-  set topic(value: Topic) {
+  set topics(value: Topic[]) {
     localStorage.setItem(this.key, JSON.stringify(value));
-    this.subtopicsService.subtopics = value.subtopics;
-    this.selectedTopic.next(value);
+    if (value != undefined) {
+      const subtopics = [];
+      value.forEach(topic => {
+        subtopics.push.apply(subtopics, topic.subtopics);
+      });
+      this.subtopicsService.subtopics = subtopics;
+    }
+    this.selectedTopics.next(value);
   }
  
-  get topic(): Topic {
+  get topics(): Topic[] {
     const json = localStorage.getItem(this.key);
     if (json != undefined) {
-      return JSON.parse(json) as Topic;
+      return JSON.parse(json) as Topic[];
     }
     else{
       return undefined;

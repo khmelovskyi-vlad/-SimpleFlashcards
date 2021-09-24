@@ -18,7 +18,7 @@ namespace SimpleFlashcards.Entities.Flashcards
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
         public Guid? TopicId { get; set; }
-        public Topic Topic { get; set; }
+        public List<FlashcardTopic> FlashcardTopics { get; set; }
         public bool IsAllSubtopics { get; set; } = true;
         public List<FlashcardSubtopic> FlashcardSubtopics { get; set; }
     }

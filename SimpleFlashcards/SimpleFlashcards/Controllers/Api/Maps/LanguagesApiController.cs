@@ -25,7 +25,7 @@ namespace SimpleFlashcards.Controllers.Api.Maps
         [Route("")]
         public async Task<IEnumerable<LanguageModel>> GetLanguages()
         {
-            //foo
+            //asd vdfvdfv fwsefwefew
             return ((await _context.Languages.ToListAsync()) ?? new List<Language>()).Select(language => new LanguageModel(language));
         }
     }

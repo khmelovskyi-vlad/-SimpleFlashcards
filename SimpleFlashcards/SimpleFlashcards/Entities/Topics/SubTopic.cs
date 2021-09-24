@@ -11,8 +11,8 @@ namespace SimpleFlashcards.Entities.Topics
         public string Value { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime UpdateDate { get; set; }
-        public Topic Topic { get; set; }
         public Guid TopicId { get; set; }
+        public Topic Topic { get; set; }
         public List<FlashcardSubtopic> FlashcardSubtopics { get; set; }
     }
 }

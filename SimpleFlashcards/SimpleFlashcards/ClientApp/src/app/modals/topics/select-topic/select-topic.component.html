@@ -16,8 +16,8 @@
       <div class="modal-body">
         <div class="mb-3">
           <label for="selectTopic" class="form-label">New topic:</label>
-          <input [value]="topic.value" (input)="onSearchTopics($event.target.value)"
-          type="text" class="form-control" id="selectTopic" placeholder="topic">
+          <!-- <input [value]="topic.value" (input)="onSearchTopics($event.target.value)"
+          type="text" class="form-control" id="selectTopic" placeholder="topic"> -->
         </div>
         <div *ngFor="let receivedTopic of receivedTopics" class="row m-0 p-0 mb-3" >
           <button type="button" class="btn btn-primary" (click)="selectTopic(receivedTopic)">

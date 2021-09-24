@@ -31,6 +31,7 @@ namespace SimpleFlashcards.Data
         public DbSet<FileInfoWordPronunciation> FileInfoWordPronunciations { get; set; }
 
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<FlashcardTopic> FlashcardTopics { get; set; }
         public DbSet<Subtopic> Subtopics { get; set; }
         public DbSet<FlashcardSubtopic> FlashcardSubtopics { get; set; }
 
