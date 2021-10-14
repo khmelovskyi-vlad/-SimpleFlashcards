@@ -137,7 +137,7 @@ namespace SimpleFlashcards
                 if (env.IsDevelopment())
                 {
                     app.UseDeveloperExceptionPage();
-                    spa.Options.StartupTimeout = new TimeSpan(days: 0, hours: 0, minutes: 2, seconds: 30);
+                    //spa.Options.StartupTimeout = new TimeSpan(days: 0, hours: 0, minutes: 2, seconds: 30);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

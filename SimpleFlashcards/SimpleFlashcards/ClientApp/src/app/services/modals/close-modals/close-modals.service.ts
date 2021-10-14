@@ -16,7 +16,7 @@ export class CloseModalsService {
   
   openModal(template: TemplateRef<any>, subscriptions: Subscription[], modalRef: BsModalRef, modalId: number,
     closeModalId?: number, config?: ModalOptions): void
-    {
+  {
     const needConfig = this.getConfig(modalId, config);
     subscriptions.push(
       this.modalService.onHidden.subscribe((reason: string | any) => {

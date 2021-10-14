@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-SimpleFlashcards-4EFA9247-F385-415D-A166-448150350019</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
