@@ -1,5 +1,5 @@
 <div class="row m-0 p-0">
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-topic">
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">
     <ng-container *ngIf="topic; else elseBlock">
       {{topic.value}}
     </ng-container>
@@ -9,38 +9,35 @@
   </button>
 </div>
 
-
-
-<div class="modal fade" id="edit-topic" tabindex="-1" aria-labelledby="editTopicModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editTopicModalLabel">Change topic</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <ng-container *ngIf="topic != undefined">
-          <div class="mb-3">
-            <label [for]="'editTopic' + topic.id" class="form-label">Topic:</label>
-            <input [(ngModel)]="topic.value" type="text" class="form-control" 
-            [id]="'editTopic' + topic.id" placeholder="topic">
-          </div>
-          <div *ngFor="let subtopic of topic.subtopics; index as i" class="mb-3">
-            <div class="mb-3">
-              <label [for]="'editSubtopic' + i + topic.id" class="form-label">Subtopic {{i + 1}}:</label>
-              <input [(ngModel)]="subtopic.value" type="text" class="form-control" 
-              [id]="'editSubtopic' + i + topic.id" placeholder="subtopic">
-            </div>
-          </div>
-          <div class="mb-3">
-            <button class="btn btn-primary" (click)="addSubtopic()">Add subtopic</button>
-          </div>
-        </ng-container>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="edit()">Change</button>
-      </div>
+<ng-template #template>
+  <div class="modal-header">
+    <div class="row m-0 p-0">
+      <h5 class="modal-title col-12" id="editTopicModalLabel">Change topic</h5>
+      <h3 *ngIf="message" class="col-12" [class]="isError ? 'text-danger' : 'text-success'">{{message}}</h3>
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
-</div>
+  <div class="modal-body">
+    <ng-container *ngIf="topic != undefined">
+      <div class="mb-3">
+        <label [for]="'editTopic' + topic.id" class="form-label">Topic:</label>
+        <input [(ngModel)]="topic.value" type="text" class="form-control" 
+        [id]="'editTopic' + topic.id" placeholder="topic">
+      </div>
+      <div *ngFor="let subtopic of topic.subtopics; index as i" class="mb-3">
+        <div class="mb-3">
+          <label [for]="'editSubtopic' + i + topic.id" class="form-label">Subtopic {{i + 1}}:</label>
+          <input [(ngModel)]="subtopic.value" type="text" class="form-control" 
+          [id]="'editSubtopic' + i + topic.id" placeholder="subtopic">
+        </div>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary" (click)="addSubtopic()">Add subtopic</button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" (click)="edit()">Change</button>
+  </div>
+</ng-template>

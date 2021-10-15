@@ -6,7 +6,10 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h5 class="modal-title" id="mainTopicModalLabel">Add topic</h5>
+    <div class="row m-0 p-0">
+      <h5 class="modal-title col-12" id="mainTopicModalLabel">Add topic</h5>
+      <h3 *ngIf="message" class="col-12" [class]="isError ? 'text-danger' : 'text-success'">{{message}}</h3>
+    </div>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   <div class="modal-body">

@@ -4,6 +4,7 @@ import { GeneralDataService } from '../../../services/general-data/general-data.
 
 import * as conformityModal from '../../../../assets/conformities/conformity-modal.json';
 import { OpenMainTopicModalService } from '../../../services/modals/open-main-topic-modal/open-main-topic-modal.service';
+import { ParentModalData } from '../../../models/modals/parent-modal-data';
 
 @Component({
   selector: 'app-main-topic',
@@ -13,9 +14,7 @@ import { OpenMainTopicModalService } from '../../../services/modals/open-main-to
 export class MainTopicComponent implements OnInit {
 
   @Input() showButton = true;
-  @Input() closeModalId?: number;
   modalRef: BsModalRef;
-  modalId = conformityModal.MainTopicComponent;
   @ViewChild('template') public templateRef: TemplateRef<any>;
   
   constructor(public generalData: GeneralDataService,
@@ -30,8 +29,12 @@ export class MainTopicComponent implements OnInit {
     });
   }
 
+  getOpenModalEvent(template: TemplateRef<any>): ParentModalData{
+    return new ParentModalData(() => this.openModal(template), conformityModal.MainTopicComponent);
+  }
+
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { id: this.modalId });
+    this.modalRef = this.modalService.show(template, { id: conformityModal.MainTopicComponent });
   }
 
 }

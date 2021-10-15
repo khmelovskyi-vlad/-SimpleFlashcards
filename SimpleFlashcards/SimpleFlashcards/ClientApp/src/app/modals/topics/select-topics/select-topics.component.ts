@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import * as conformityModal from '../../../../assets/conformities/conformity-modal.json';
 import { OpenTopicModalsService } from '../../../services/modals/open-topic-modals/open-topic-modals.service';
 import { MainModalData } from '../../../models/modals/main-modal-data';
+import { ParentModalData } from '../../../models/modals/parent-modal-data';
 
 @Component({
   selector: 'app-select-topics',
@@ -16,7 +17,7 @@ import { MainModalData } from '../../../models/modals/main-modal-data';
 })
 export class SelectTopicsComponent implements OnInit {
 
-  @Input() closeModalId?: number;
+  @Input() openModalEvent: ParentModalData;
   mainModalData =  new MainModalData(conformityModal.SelectTopicsComponent);
 
   private searchTopics = new Subject<string>();
@@ -53,6 +54,6 @@ export class SelectTopicsComponent implements OnInit {
   }
   
   openModal(template: TemplateRef<any>) {
-    this.openTopicModalsService.openModal(template, this.mainModalData, this.closeModalId);
+    this.openTopicModalsService.openModal(template, this.mainModalData, this.openModalEvent);
   }
 }

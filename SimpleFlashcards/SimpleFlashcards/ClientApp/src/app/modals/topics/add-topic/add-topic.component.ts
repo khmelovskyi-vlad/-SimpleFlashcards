@@ -6,6 +6,7 @@ import { TopicsApiService } from '../../../services/api/topics/topics-api.servic
 
 import * as conformityModal from '../../../../assets/conformities/conformity-modal.json';
 import { OpenTopicModalsService } from '../../../services/modals/open-topic-modals/open-topic-modals.service';
+import { ParentModalData } from '../../../models/modals/parent-modal-data';
 
 @Component({
   selector: 'app-add-topic',
@@ -14,10 +15,12 @@ import { OpenTopicModalsService } from '../../../services/modals/open-topic-moda
 })
 export class AddTopicComponent implements OnInit {
 
-  @Input() closeModalId?: number;
+  @Input() openModalEvent: ParentModalData;
   mainModalData =  new MainModalData(conformityModal.AddTopicComponent);
   
   topic: Topic;
+  message: string = '';
+  isError = false;
   constructor(private topicsApiService: TopicsApiService, 
     private openTopicModalsService: OpenTopicModalsService) { }
 
@@ -30,11 +33,20 @@ export class AddTopicComponent implements OnInit {
   }
 
   addTopic(){
-    this.topicsApiService.addTopic(this.topic).subscribe(topic => this.topic = topic);
+    this.topicsApiService.addTopic(this.topic).subscribe(topic => {
+      if (topic == undefined) {
+        this.isError = true;
+        this.message = 'Something crashed, sorry';
+      }
+      else{
+        this.topic = topic;
+        this.message = 'Topic added successfully';
+      }
+    });
   }
   
   openModal(template: TemplateRef<any>) {
-    this.openTopicModalsService.openModal(template, this.mainModalData, this.closeModalId);
+    this.openTopicModalsService.openModal(template, this.mainModalData, this.openModalEvent);
   }
 
 }

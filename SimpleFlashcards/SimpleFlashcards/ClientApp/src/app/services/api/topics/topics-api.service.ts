@@ -32,7 +32,7 @@ export class TopicsApiService {
     const url = this.urlCreator.createMainApiUrl(pathParts);
     return this.http.post<Topic>(url, topic)
             .pipe(
-              catchError(this.errorHandler.handleError<Topic>('addTopics'))
+              catchError(this.errorHandler.handleError<Topic>('addTopic'))
             );
   }
 

@@ -44,7 +44,6 @@ namespace SimpleFlashcards.Controllers.Api.Topics
         {
             if (topicModel != null)
             {
-                //
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
                 _topicCreator.AddTopic(topicModel, user.Id);
                 try

@@ -2,10 +2,11 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { TopicsApiService } from '../../../services/api/topics/topics-api.service';
 import { Subtopic } from '../../../models/topics/subtopic';
 import { Topic } from '../../../models/topics/topic';
-import { Subscription } from 'rxjs';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import * as conformityModal from '../../../../assets/conformities/conformity-modal.json';
+import { OpenTopicModalsService } from '../../../services/modals/open-topic-modals/open-topic-modals.service';
+import { MainModalData } from '../../../models/modals/main-modal-data';
+import { ParentModalData } from '../../../models/modals/parent-modal-data';
 
 @Component({
   selector: 'app-edit-topic',
@@ -15,26 +16,28 @@ import * as conformityModal from '../../../../assets/conformities/conformity-mod
 export class EditTopicComponent implements OnInit {
 
   @Input() topic: Topic;
-  @Input() closeModalId?: number;
+  @Input() openModalEvent: ParentModalData;
+  mainModalData =  new MainModalData(conformityModal.EditTopicComponent);
 
-  modalRef: BsModalRef;
-  modalId = conformityModal.EditTopicComponent;
-  subscriptions: Subscription[] = [];
-  
-  config = {
-    backdrop: true,
-    class: 'modal-lg',
-    id: this.modalId
-  };
-
+  message: string = '';
+  isError = false;
   constructor(private topicsApiService: TopicsApiService, 
-    private modalService: BsModalService) { }
+    private openTopicModalsService: OpenTopicModalsService) { }
 
   ngOnInit(): void {
   }
 
   edit(){
-    this.topicsApiService.editTopic(this.topic).subscribe(topic => this.topic = topic);
+    this.topicsApiService.editTopic(this.topic).subscribe(topic => {
+      if (topic == undefined) {
+        this.isError = true;
+        this.message = 'Something crashed, sorry';
+      }
+      else{
+        this.topic = topic;
+        this.message = 'Topic changed successfully';
+      }
+    });
   }
   
   addSubtopic(){
@@ -42,29 +45,7 @@ export class EditTopicComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.subscriptions.push(
-      this.modalService.onHidden.subscribe((reason: string | any) => {
-        if (this.closeModalId == reason.id) {
-          this.modalRef = this.modalService.show(template, this.config );
-        }
-        else{
-          this.unsubscribe(); 
-        }
-      })
-    );
-    if (this.closeModalId) {
-      this.modalService.hide(this.closeModalId);
-    }
-    else {
-      this.modalRef = this.modalService.show(template, this.config );
-    }
-  }
-
-  unsubscribe() {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
-    this.subscriptions = [];
+    this.openTopicModalsService.openModal(template, this.mainModalData, this.openModalEvent, undefined, false);
   }
 
 }

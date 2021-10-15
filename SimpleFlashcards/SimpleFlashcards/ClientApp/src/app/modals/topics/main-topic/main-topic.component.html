@@ -50,13 +50,13 @@
   </div>
   <div class="modal-body">
     <div class="mb-3">
-      <app-select-topics [closeModalId]="modalId" (click)="modalRef?.hide()"></app-select-topics>
+      <app-select-topics [openModalEvent]="getOpenModalEvent(template)" (click)="modalRef?.hide()"></app-select-topics>
     </div>
     <div class="mb-3">
-      <app-add-topic [closeModalId]="modalId" (click)="modalRef?.hide()"></app-add-topic>
+      <app-add-topic [openModalEvent]="getOpenModalEvent(template)" (click)="modalRef?.hide()"></app-add-topic>
     </div>
     <div>
-      <app-edit-topics [closeModalId]="modalId" (click)="modalRef?.hide()"></app-edit-topics>
+      <app-edit-topics [openModalEvent]="getOpenModalEvent(template)" (click)="modalRef?.hide()"></app-edit-topics>
     </div>
   </div>
   <div class="modal-footer">

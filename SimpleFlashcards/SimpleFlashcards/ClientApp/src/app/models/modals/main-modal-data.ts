@@ -3,9 +3,7 @@ import { Subscription } from "rxjs";
 
 export class MainModalData{
   modalRef: BsModalRef;
-  modalId: number;
   subscriptions: Subscription[] = [];
-  constructor(modalId: number){
-    this.modalId = modalId;
+  constructor(public modalId: number){
   }
 }
