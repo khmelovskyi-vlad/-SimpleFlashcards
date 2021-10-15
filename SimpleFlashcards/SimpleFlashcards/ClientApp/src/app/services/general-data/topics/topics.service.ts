@@ -8,7 +8,7 @@ import { SubtopicsService } from '../subtopics/subtopics.service';
 })
 export class TopicsService {
 
-  private key = "topic";
+  private key = "topics";
 
   selectedTopics = new BehaviorSubject(this.topics);
   constructor(private subtopicsService: SubtopicsService) { }
@@ -32,6 +32,38 @@ export class TopicsService {
     }
     else{
       return undefined;
+    }
+  }
+
+  addTopic(topic: Topic): void {
+    if (topic) {
+      let topics = this.topics;
+      if (!topics) {
+        topics = [];
+      }
+      for (let i = 0; i < topics.length; i++) {
+        if (topic.id == topics[i].id) {
+          return;
+        }
+      }
+      topics.push(topic);
+      this.topics = topics;
+    }
+  }
+
+  removeTopic(topic: Topic): void {
+    if (topic) {
+      let topics = this.topics;
+      if (!topics) {
+        topics = [];
+      }
+      for (let i = 0; i < topics.length; i++) {
+        if (topic.id == topics[i].id) {
+          topics.splice(i, 1);
+          this.topics = topics;
+          return;
+        }
+      }
     }
   }
 }

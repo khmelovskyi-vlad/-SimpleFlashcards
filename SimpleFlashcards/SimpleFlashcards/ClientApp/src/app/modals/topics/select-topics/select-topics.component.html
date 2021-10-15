@@ -12,8 +12,20 @@
   <div class="modal-body">
     <div class="mb-3">
       <label for="selectTopic" class="form-label">New topic:</label>
-      <!-- <input [value]="topic.value" (input)="onSearchTopics($event.target.value)"
-      type="text" class="form-control" id="selectTopic" placeholder="topic"> -->
+      <input [value]="topic.value" (input)="onSearchTopics($event.target.value)"
+      type="text" class="form-control" id="selectTopic" placeholder="topic">
+    </div>
+    <div class="row m-0 p-0 mb-3" >
+      <button type="button" class="btn btn-primary" [class]="showSelectedTopics ? 'btn-danger' : 'btn-success'" (click)="showSelectedTopics = !showSelectedTopics">
+        {{showSelectedTopics ? 'Hidden selected topics' : 'Show selected topics'}}
+      </button>
+    </div>
+    <div *ngIf="showSelectedTopics && topics" class="m-0 px-5 my-3 border border-primary border-5 rounded">
+      <div *ngFor="let topic of topics" class="row my-1 m-0 p-0">
+        <button type="button" class="btn btn-primary" (click)="removeTopic(topic)">
+          {{topic.value}}
+        </button>
+      </div>
     </div>
     <div *ngFor="let receivedTopic of receivedTopics" class="row m-0 p-0 mb-3" >
       <button type="button" class="btn btn-primary" (click)="selectTopic(receivedTopic)">
